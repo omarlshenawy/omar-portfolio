@@ -3,10 +3,11 @@ const MANIFEST = 'flutter-app-manifest';
 const TEMP = 'flutter-temp-cache';
 const CACHE_NAME = 'flutter-app-cache';
 
-const RESOURCES = {"assets/AssetManifest.bin": "916c49d1bcbaae68e91bff6195a4bf8e",
-"assets/AssetManifest.bin.json": "962a3b3e9e8a80295abf59c48376164d",
-"assets/AssetManifest.json": "5963739c7acef208bc4893865675a1dd",
+const RESOURCES = {"assets/AssetManifest.bin": "f0dbd413da052ee972b31d4f8f004fd9",
+"assets/AssetManifest.bin.json": "ee1c2dc43426ae84ccd47a03e17a8b50",
+"assets/AssetManifest.json": "dfee6114ff0fc169dce9ae4b9aa96779",
 "assets/assets/ar_logo.png": "1302267e6aa05a58c905dd00d10dbeb1",
+"assets/assets/avatar.jpg": "0209d9cf845575514dd68d595d433e2e",
 "assets/assets/fit_logo.png": "3e0972eff6c45d5a7624f8cb5a60992f",
 "assets/assets/hr_logo.png": "d0d0f9394e89d5d676def8d11b7828bc",
 "assets/assets/med_alert_logo.png": "d0c40e9fc354d8f9379d9d8be9b1050a",
@@ -30,7 +31,7 @@ const RESOURCES = {"assets/AssetManifest.bin": "916c49d1bcbaae68e91bff6195a4bf8e
 "canvaskit/skwasm.wasm": "39dd80367a4e71582d234948adc521c0",
 "favicon.png": "5dcef449791fa27946b3d35ad8803796",
 "flutter.js": "83d881c1dbb6d6bcd6b42e274605b69c",
-"flutter_bootstrap.js": "507fa5b296094f2e0d24ec55fc70be98",
+"flutter_bootstrap.js": "7c05730b15063ba58b74f207ad0436f1",
 "icons/Icon-192.png": "ac9a721a12bbc803b44f645561ecb1e1",
 "icons/Icon-512.png": "96e752610906ba2a93c65f8abe1645f1",
 "icons/Icon-maskable-192.png": "c457ef57daa1d16f64b27b786ec2ea3c",
