@@ -564,23 +564,43 @@ class _IntroCard extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(height: 8),
-                    Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Flexible(
-                          child: ElevatedButton(
-                            onPressed: onHireTap,
-                            child: const Text('Contact me'),
-                          ),
-                        ),
-                        const SizedBox(width: 8),
-                        Flexible(
-                          child: OutlinedButton(
-                            onPressed: () => _openUrl("https://drive.google.com/file/d/1k6EaY0WuVJvmMXCeaJqRfWy7I9fWT7xV/view"),
-                            child: const Text('Download CV', style: TextStyle(color: Colors.white)),
-                          ),
-                        ),
-                      ],
+                    LayoutBuilder(
+                      builder: (context, constraints) {
+                        final isMobile = constraints.maxWidth < 500; // tweak breakpoint as needed
+
+                        if (isMobile) {
+                          // MOBILE: buttons full-width, stacked
+                          return Column(
+                            crossAxisAlignment: CrossAxisAlignment.stretch,
+                            children: [
+                              ElevatedButton(
+                                onPressed: onHireTap,
+                                child: const Text('Contact me'),
+                              ),
+                              const SizedBox(height: 8),
+                              OutlinedButton(
+                                onPressed: () => _openUrl("https://drive.google.com/file/d/1k6EaY0WuVJvmMXCeaJqRfWy7I9fWT7xV/view"),
+                                child: const Text('Download CV', style: TextStyle(color: Colors.white)),
+                              ),
+                            ],
+                          );
+                        } else {
+                          // DESKTOP: buttons side by side in one row
+                          return Row(
+                            children: [
+                              ElevatedButton(
+                                onPressed: onHireTap,
+                                child: const Text('Contact me'),
+                              ),
+                              const SizedBox(width: 8),
+                              OutlinedButton(
+                                onPressed: () => _openUrl("https://drive.google.com/file/d/1k6EaY0WuVJvmMXCeaJqRfWy7I9fWT7xV/view"),
+                                child: const Text('Download CV', style: TextStyle(color: Colors.white)),
+                              ),
+                            ],
+                          );
+                        }
+                      },
                     ),
 
                   ],
