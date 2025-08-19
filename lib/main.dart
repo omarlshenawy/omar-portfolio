@@ -288,7 +288,7 @@ Perfect for homeowners, interior designers, and furniture businesses — try bef
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text('Omar Ahmed El-shenawy', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white)),
+                        Text('Omar El-shenawy', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white)),
                         Row(
                           children: [
                             ElevatedButton.icon(
@@ -550,12 +550,12 @@ class _IntroCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     DefaultTextStyle(
-                      style: const TextStyle(fontSize: 12, color: Colors.white70),
+                      style: const TextStyle(fontSize: 15, color: Colors.white70),
                       child: AnimatedTextKit(
                         isRepeatingAnimation: true,
                         repeatForever: true,
                         animatedTexts: [
-                          TyperAnimatedText('Flutter Developer - Mobile & Desktop'),
+                          TyperAnimatedText('Flutter Developer'),
                           TyperAnimatedText('Unity - 3D & AR'),
                           TyperAnimatedText('AI trainee'),
                         ],
