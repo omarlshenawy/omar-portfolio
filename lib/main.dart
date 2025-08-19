@@ -552,7 +552,7 @@ class _IntroCard extends StatelessWidget {
                     Text('Omar Ahmed El-shenawy', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white)),
                     const SizedBox(height: 6),
                     DefaultTextStyle(
-                      style: const TextStyle(fontSize: 14, color: Colors.white70),
+                      style: const TextStyle(fontSize: 12, color: Colors.white70),
                       child: AnimatedTextKit(
                         isRepeatingAnimation: true,
                         repeatForever: true,
