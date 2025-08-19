@@ -52,7 +52,7 @@ class _PortfolioHomePageState extends State<PortfolioHomePage> with SingleTicker
 With a clean interface, smart features, and scientifically backed guidance, our app helps you stay motivated and on track — no matter where you are in your fitness journey.
       ''',
       imageAsset: 'assets/fit_logo.png',
-      appUrl: 'https://github.com/yourusername/project',
+      appUrl: '',
       videoUrl: 'https://drive.google.com/drive/folders/1xUg4ndi1_FurktByKGVea311oymUN_zJ',
       lang: 'Flutter',
     ),
@@ -77,7 +77,7 @@ Notifications – Get clear, timely alerts even when your phone is locked.
 Perfect for individuals, caregivers, and anyone managing multiple medications — because your health should never be left to chance.
       ''',
       imageAsset: 'assets/med_alert_logo.png',
-      appUrl: 'https://github.com/yourusername/project',
+      appUrl: '',
       videoUrl: "https://drive.google.com/drive/folders/1g2DRig__u3dg-67Y0ZuL0RAMDJSCIVx7",
       lang: 'Flutter',
     ),
@@ -107,7 +107,7 @@ Firebase Integration – Secure storage for product data and images.
 
 Whether you’re a furniture business owner or a customer looking for the perfect piece, our app delivers a smooth, modern, and efficient furniture shopping experience. ''',
       imageAsset: 'assets/mobica_logo.png',
-      appUrl: 'https://github.com/yourusername/project',
+      appUrl: '',
       videoUrl: 'https://drive.google.com/drive/folders/12tSuhTXJSfi1Ix3lMflEv5CCBhojll0h',
       lang: 'Flutter',
     ),
@@ -132,7 +132,7 @@ Offline Listening – Store your MP3 files locally and play anytime.
 Perfect for music lovers, podcast listeners, and anyone who wants offline access to YouTube playlists.
       ''',
       imageAsset: 'assets/yt_logo.png',
-      appUrl: 'https://github.com/yourusername/project',
+      appUrl: '',
       videoUrl: 'https://drive.google.com/drive/folders/198pUfVD-m-r3foCy8iUFAnJ1YTGUDElm',
       lang: 'Flutter',
     ),
@@ -160,7 +160,7 @@ Smooth, Fast Interface – Works perfectly on phones and tablets.
 One app that replaces dozens — perfect for readers, students, and researchers in the sciences of the Quran.
       ''',
       imageAsset: 'assets/qurany_logo.png',
-      appUrl: 'https://github.com/yourusername/project',
+      appUrl: '',
       videoUrl: 'https://drive.google.com/drive/folders/1HGyZZwuZBy_dkg39nIKy1gKjA9U7DQek',
       lang: 'Flutter',
     ),
@@ -185,7 +185,7 @@ Lightweight & Fast – Optimized for smooth performance on any device.
 A simple, powerful tool to learn and practice sign language letters — anytime, anywhere.
       ''',
       imageAsset: 'assets/sign_logo.png',
-      appUrl: 'https://github.com/yourusername/project',
+      appUrl: '',
       videoUrl: 'https://drive.google.com/drive/folders/1OC97leluJB1ug2nO1HW1xh7DbSF2Gxv_',
       lang: 'computer vision',
     ),
@@ -214,7 +214,7 @@ Windows Optimized – Smooth performance and native desktop feel.
 A complete human resource management solution — fast, secure, and built for modern Windows systems.
       ''',
       imageAsset: 'assets/hr_logo.png',
-      appUrl: 'https://github.com/yourusername/project',
+      appUrl: '',
       videoUrl: 'https://drive.google.com/drive/folders/1kC3LsL5gfEKzUnWENi2mcmQeHIMbEJd1',
       lang: 'Flutter',
     ),
@@ -235,7 +235,7 @@ Surface Detection – Automatically detects floors and surfaces for accurate pla
 Perfect for homeowners, interior designers, and furniture businesses — try before you buy with AR.
       ''',
       imageAsset: 'assets/ar_logo.png',
-      appUrl: 'https://github.com/yourusername/project',
+      appUrl: '',
       videoUrl: 'https://drive.google.com/drive/folders/1NZUsZ2XowAY3C3gPJ9kXue37OxgYbk8R',
       lang: 'Unity',
     ),
@@ -454,7 +454,11 @@ Perfect for homeowners, interior designers, and furniture businesses — try bef
                   Text(p.long),
                   const SizedBox(height: 12),
                   Wrap(spacing: 8, runSpacing: 8, children: [
-                    ElevatedButton.icon(onPressed: () => _openUrl(p.appUrl), icon: const Icon(Icons.code), label: const Text('link')),
+                    ElevatedButton.icon(
+                        onPressed: () => (p.appUrl.isNotEmpty)? _openUrl(p.appUrl) : ScaffoldMessenger.of(context).showSnackBar( SnackBar(content: Text('No app available'))) ,
+                        icon: const Icon(Icons.code),
+                        label: const Text('link')
+                    ),
                     OutlinedButton.icon(onPressed: () => _openUrl(p.videoUrl), icon: const Icon(Icons.open_in_new), label: const Text('video')),
                   ])
                 ],
@@ -537,7 +541,7 @@ class _IntroCard extends StatelessWidget {
                 tag: 'avatar',
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(12),
-                  child: Image.asset('assets/avatar.jpg', width: 96, height: 96, fit: BoxFit.cover, errorBuilder: (_, __, ___) => Container(width: 96, height: 96, color: Colors.grey)),
+                  child: Image.asset('assets/avatar.jpg', width: 120, height: 120, fit: BoxFit.cover, errorBuilder: (_, __, ___) => Container(width: 96, height: 96, color: Colors.grey)),
                 ),
               ),
               const SizedBox(width: 16),
