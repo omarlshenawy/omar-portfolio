@@ -564,11 +564,25 @@ class _IntroCard extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(height: 8),
-                    Row(children: [
-                      ElevatedButton(onPressed: onHireTap, child: const Text('Contact me'),),
-                      const SizedBox(width: 8),
-                      OutlinedButton(onPressed: () => _openUrl("https://drive.google.com/file/d/1k6EaY0WuVJvmMXCeaJqRfWy7I9fWT7xV/view"), child: const Text('Download CV', style: TextStyle(color: Colors.white)),),
-                    ])
+                    Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Flexible(
+                          child: ElevatedButton(
+                            onPressed: onHireTap,
+                            child: const Text('Contact me'),
+                          ),
+                        ),
+                        const SizedBox(width: 8),
+                        Flexible(
+                          child: OutlinedButton(
+                            onPressed: () => _openUrl("https://drive.google.com/file/d/1k6EaY0WuVJvmMXCeaJqRfWy7I9fWT7xV/view"),
+                            child: const Text('Download CV', style: TextStyle(color: Colors.white)),
+                          ),
+                        ),
+                      ],
+                    ),
+
                   ],
                 ),
               )
