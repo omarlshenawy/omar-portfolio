@@ -44,9 +44,13 @@ class _PortfolioHomePageState extends State<PortfolioHomePage> with SingleTicker
       long: '''Transform your health journey with our all-in-one fitness app, designed to make achieving your goals easier and more enjoyable. Whether you’re looking to lose weight, build muscle, or simply live healthier, our app offers everything you need in one place:
 
  - Personalized Nutrition Plans – Get tailored meal plans that fit your lifestyle and goals.
+ 
  - Calorie Calculator – Track your daily intake with precision to stay on target.
+ 
  - Food Alternatives – Discover healthier swaps for your favorite foods.
+ 
  - Exercise Plans & Alternatives – Access guided workout plans with 3D animations and substitute exercises for flexibility.
+ 
  - Water & Step Tracking – Stay hydrated and active with built-in trackers.
 
 With a clean interface, smart features, and scientifically backed guidance, our app helps you stay motivated and on track — no matter where you are in your fitness journey.
@@ -244,6 +248,9 @@ Perfect for homeowners, interior designers, and furniture businesses — try bef
   @override
   void initState() {
     super.initState();
+    for (final p in projects) {
+      precacheImage(AssetImage(p.imageAsset), context);
+    }
     _bgController = AnimationController(
       vsync: this,
       duration: const Duration(seconds: 8),
@@ -550,7 +557,7 @@ class _IntroCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     DefaultTextStyle(
-                      style: const TextStyle(fontSize: 15, color: Colors.white70),
+                      style: const TextStyle(fontSize: 16, color: Colors.white70),
                       child: AnimatedTextKit(
                         isRepeatingAnimation: true,
                         repeatForever: true,
