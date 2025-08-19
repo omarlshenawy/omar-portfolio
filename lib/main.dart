@@ -288,11 +288,7 @@ Perfect for homeowners, interior designers, and furniture businesses — try bef
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text('omar.works()',
-                            style: TextStyle(
-                                fontWeight: FontWeight.w700,
-                                fontSize: 20,
-                                color: Colors.white.withOpacity(0.95))),
+                        Text('Omar Ahmed El-shenawy', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white)),
                         Row(
                           children: [
                             ElevatedButton.icon(
@@ -549,8 +545,6 @@ class _IntroCard extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('Omar Ahmed El-shenawy', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white)),
-                    const SizedBox(height: 6),
                     DefaultTextStyle(
                       style: const TextStyle(fontSize: 12, color: Colors.white70),
                       child: AnimatedTextKit(
@@ -577,7 +571,7 @@ class _IntroCard extends StatelessWidget {
                                 onPressed: onHireTap,
                                 child: const Text('Contact me'),
                               ),
-                              const SizedBox(height: 8),
+                              const SizedBox(height: 6),
                               OutlinedButton(
                                 onPressed: () => _openUrl("https://drive.google.com/file/d/1k6EaY0WuVJvmMXCeaJqRfWy7I9fWT7xV/view"),
                                 child: const Text('Download CV', style: TextStyle(color: Colors.white)),
