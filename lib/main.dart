@@ -466,7 +466,7 @@ Perfect for homeowners, interior designers, and furniture businesses — try bef
                         icon: const Icon(Icons.code),
                         label: const Text('link')
                     ),
-                    OutlinedButton.icon(onPressed: () => _openUrl(p.videoUrl), icon: const Icon(Icons.open_in_new), label: const Text('video')),
+                    OutlinedButton.icon(onPressed: () => _openUrl(p.videoUrl), icon: const Icon(Icons.open_in_new), label: const Text('Media')),
                   ])
                 ],
               ),

@@ -66505,7 +66505,7 @@ M(a){var s,r,q,p,o,n,m=this,l=null,k=m.d
 k===$&&A.a()
 k=A.ic(k,new A.a8g(m),l)
 s=t.E
-r=A.iN(A.c([A.fk("Omar El-shenawy",A.pp(l,l,B.i,l,l,l,l,l,l,l,l,20,l,l,B.aJ,l,l,!0,l,l,l,l,l,l,l,l),l),A.iN(A.c([A.agw(B.kt,B.NW,new A.a8h(m))],s),B.as,B.au,B.b3)],s),B.as,B.pE,B.b3)
+r=A.iN(A.c([A.fk("Omar El-shenawy",A.pp(l,l,B.i,l,l,l,l,l,l,l,l,20,l,l,B.aJ,l,l,!0,l,l,l,l,l,l,l,l),l),A.iN(A.c([A.agw(B.kt,B.NV,new A.a8h(m))],s),B.as,B.au,B.b3)],s),B.as,B.pE,B.b3)
 q=A.UK(new A.a8i(m))
 p=A.UK(new A.a8j(m))
 o=A.bb(15,B.i.H()>>>16&255,B.i.H()>>>8&255,B.i.H()&255)
@@ -66573,7 +66573,7 @@ $1(a){return new A.lu(0.7,0.4,0.95,!1,new A.a8a(this.a,this.b),null)},
 $S:437}
 A.a8a.prototype={
 $2(a,b){var s=null,r=this.b,q=this.a,p=t.E
-return A.fC(A.aid(A.ij(A.c([A.rx(A.fC(s,s,new A.d6(B.yF,s,s,A.hj(12),s,s,B.ar),6,s,s,48),s,s),B.br,A.fk(r.a,B.KC,s),B.iw,A.acz(A.hj(12),new A.AW(1.7777777777777777,A.ad6(r.d,new A.a87(),B.jb,s,s),s)),B.br,A.fk(r.c,s,s),B.br,A.a3v(A.c([A.agw(B.kt,B.NZ,new A.a88(q,r,a)),A.aro(B.AL,B.NU,new A.a89(q,r))],p),8,8)],p),B.aa),b),s,B.wP,s,s,B.A0,s)},
+return A.fC(A.aid(A.ij(A.c([A.rx(A.fC(s,s,new A.d6(B.yF,s,s,A.hj(12),s,s,B.ar),6,s,s,48),s,s),B.br,A.fk(r.a,B.KC,s),B.iw,A.acz(A.hj(12),new A.AW(1.7777777777777777,A.ad6(r.d,new A.a87(),B.jb,s,s),s)),B.br,A.fk(r.c,s,s),B.br,A.a3v(A.c([A.agw(B.kt,B.NY,new A.a88(q,r,a)),A.aro(B.AL,B.NZ,new A.a89(q,r))],p),8,8)],p),B.aa),b),s,B.wP,s,s,B.A0,s)},
 $S:438}
 A.a87.prototype={
 $3(a,b,c){var s=null
@@ -66640,7 +66640,7 @@ $S:0}
 A.zd.prototype={
 M(a){var s=null,r=A.c(["Flutter","Dart","Responsive design","Animations","Firebase integration","Maps integration","AI integration"],t.s),q=A.bb(10,B.i.H()>>>16&255,B.i.H()>>>8&255,B.i.H()&255),p=A.hj(16),o=t.sI
 o=A.W(new A.ae(r,new A.a9G(),o),o.h("aC.E"))
-return A.fC(A.ij(A.c([B.NT,B.br,A.a3v(o,8,8),B.br,B.NX,B.iv,new A.uk(0.8,B.yJ,s,s,s,s,s),B.iw,B.NY],t.E),B.aa),s,new A.d6(q,s,s,p,s,s,B.ar),s,s,B.h_,s)}}
+return A.fC(A.ij(A.c([B.NT,B.br,A.a3v(o,8,8),B.br,B.NW,B.iv,new A.uk(0.8,B.yJ,s,s,s,s,s),B.iw,B.NX],t.E),B.aa),s,new A.d6(q,s,s,p,s,s,B.ar),s,s,B.h_,s)}}
 A.a9G.prototype={
 $1(a){return new A.li(A.fk(a,null,null),B.vN,B.fN,null)},
 $S:440}
@@ -71075,8 +71075,8 @@ B.J3=new A.hN(3,"hide")
 B.Qi=new A.hN(4,"remove")
 B.vy=new A.hN(5,"timeout")
 B.J4=new A.pc(null,null,null,null,null,null,null,null,null,null,null,null,null,null)
-B.NV=new A.dL("Could not open link",null,null,null,null)
-B.vz=new A.mR(B.NV,null,null,null,null,null,null,null,null,null,null,null,null,B.kf,null,null,null,B.a5,null)
+B.NU=new A.dL("Could not open link",null,null,null,null)
+B.vz=new A.mR(B.NU,null,null,null,null,null,null,null,null,null,null,null,null,B.kf,null,null,null,B.a5,null)
 B.vA=new A.wj(0,"permissive")
 B.J5=new A.wj(1,"normal")
 B.J6=new A.wj(2,"forced")
@@ -71410,11 +71410,11 @@ B.NR=new A.dL("I\u2019m available for freelance projects and Part-time roles.\nD
 B.NS=new A.dL("Email",null,null,null,null)
 B.Nd=new A.j(!0,B.i,null,null,null,null,16,B.cW,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null)
 B.NT=new A.dL("Skills",null,B.Nd,null,null)
-B.NU=new A.dL("video",null,null,null,null)
-B.NW=new A.dL("GitHub",null,null,null,null)
-B.NX=new A.dL("Experience",null,B.vM,null,null)
-B.NY=new A.dL("2+ years building apps",null,B.iD,null,null)
-B.NZ=new A.dL("link",null,null,null,null)
+B.NV=new A.dL("GitHub",null,null,null,null)
+B.NW=new A.dL("Experience",null,B.vM,null,null)
+B.NX=new A.dL("2+ years building apps",null,B.iD,null,null)
+B.NY=new A.dL("link",null,null,null,null)
+B.NZ=new A.dL("Media",null,null,null,null)
 B.Ql=new A.a2Q(0,"system")
 B.vR=new A.wM(0)
 B.O_=new A.wM(0.5)
