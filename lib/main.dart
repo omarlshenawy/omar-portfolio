@@ -62,7 +62,7 @@ With a clean interface, smart features, and scientifically backed guidance, our 
     ),
 
     Project(
-      title: "Med Alerts",
+      title: "Med Alert",
       short: 'Never miss a dose — smart medicine reminders with tracking to keep you on schedule.',
       long: '''Stay on top of your health with our reliable medicine reminder app. Designed for simplicity and accuracy, it ensures you never miss a dose again. Whether you’re managing daily prescriptions, vitamins, or supplements, our app keeps you organized and consistent.
 
