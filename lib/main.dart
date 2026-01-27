@@ -40,7 +40,7 @@ class _PortfolioHomePageState extends State<PortfolioHomePage> with SingleTicker
   final List<Project> projects = [
     Project(
       title: "FitAItion",
-      short: 'All-in-one fitness companion with nutrition plans, exercise guides, trackers, and smart alternatives — your path to a healthier lifestyle.',
+      short: 'All-in-one fitness companion with nutrition plans, exercise guides, trackers, and smart alternatives.',
       long: '''Transform your health journey with our all-in-one fitness app, designed to make achieving your goals easier and more enjoyable. Whether you’re looking to lose weight, build muscle, or simply live healthier, our app offers everything you need in one place:
 
  - Personalized Nutrition Plans – Get tailored meal plans that fit your lifestyle and goals.
@@ -248,13 +248,18 @@ Perfect for homeowners, interior designers, and furniture businesses — try bef
   @override
   void initState() {
     super.initState();
-    for (final p in projects) {
-      precacheImage(AssetImage(p.imageAsset), context);
-    }
     _bgController = AnimationController(
       vsync: this,
       duration: const Duration(seconds: 8),
     )..repeat();
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    for (final p in projects) {
+      precacheImage(AssetImage(p.imageAsset), context); // ✅ safe here
+    }
   }
 
   @override
@@ -272,6 +277,7 @@ Perfect for homeowners, interior designers, and furniture businesses — try bef
   }
 
   @override
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Stack(
@@ -288,88 +294,102 @@ Perfect for homeowners, interior designers, and furniture businesses — try bef
           SafeArea(
             child: SingleChildScrollView(
               child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 32),
+                padding: const EdgeInsets.symmetric(horizontal: 42, vertical: 32),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    /// ───────── HEADER ─────────
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text('Omar El-shenawy', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white)),
-                        Row(
-                          children: [
-                            ElevatedButton.icon(
-                              onPressed: () => _openUrl(
-                                  'https://github.com/yourusername'),
-                              icon: const Icon(Icons.code),
-                              label: const Text('GitHub'),
-                            )
-                          ],
-                        )
+                        const Text(
+                          'Omar El-shenawy',
+                          style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                          ),
+                        ),
+                        ElevatedButton.icon(
+                          onPressed: () => _openUrl('https://github.com/omarlshenawy'),
+                          icon: const Icon(Icons.code),
+                          label: const Text('GitHub'),
+                        ),
                       ],
                     ),
+
                     const SizedBox(height: 28),
-                    LayoutBuilder(builder: (context, constraints) {
-                      final isNarrow = constraints.maxWidth < 800;
-                      return isNarrow
-                          ? Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          _IntroCard(onHireTap: () => _openUrl("https://wa.me/+201008653386?text=${Uri.encodeComponent("Hello Omar, I'd like to hire you.")}")),
-                          const SizedBox(height: 20),
-                          _SkillsCard(),
-                        ],
-                      )
-                          : Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Expanded(flex: 6, child: _IntroCard(onHireTap: () => _openUrl("https://wa.me/+201008653386?text=${Uri.encodeComponent("Hello Omar, I'd like to hire you.")}"))),
-                          const SizedBox(width: 20),
-                          Expanded(flex: 4, child: _SkillsCard()),
-                        ],
-                      );
-                    }),
-                    const SizedBox(height: 36),
-                    SectionTitle(id: 'projects', title: 'Selected Projects'),
-                    const SizedBox(height: 12),
-                    AnimationLimiter(
-                      child: LayoutBuilder(builder: (context, constraints) {
-                        int crossAxisCount = 4;
-                        if (constraints.maxWidth < 800) crossAxisCount = 2;
-                        else if (constraints.maxWidth < 1200) crossAxisCount = 3;
-                        return GridView.builder(
-                          shrinkWrap: true,
-                          physics: const NeverScrollableScrollPhysics(),
-                          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                              crossAxisCount: crossAxisCount,
-                              mainAxisExtent: 260,
-                              crossAxisSpacing: 16,
-                              mainAxisSpacing: 16),
-                          itemCount: projects.length,
-                          itemBuilder: (context, index) {
-                            final p = projects[index];
-                            return AnimationConfiguration.staggeredGrid(
-                              position: index,
-                              duration: const Duration(milliseconds: 500),
-                              columnCount: crossAxisCount,
-                              child: ScaleAnimation(
-                                child: FadeInAnimation(
-                                  child: ProjectCard(
-                                    project: p,
-                                    onOpen: () => _showProjectDetails(context, p),
-                                  ),
-                                ),
-                              ),
-                            );
-                          },
-                        );
-                      }),
+
+                    /// ───────── INTRO ─────────
+                    _IntroCard(
+                      onHireTap: () => _openUrl(
+                        "https://wa.me/+201008653386?text=${Uri.encodeComponent(
+                          "Hello Omar, I'd like to hire you.",
+                        )}",
+                      ),
                     ),
 
                     const SizedBox(height: 40),
 
-                    SectionTitle(id: 'contact', title: 'Get in touch'),
+                    /// ───────── PROJECTS ─────────
+                    const SectionTitle(id: 'projects', title: 'Selected Projects'),
                     const SizedBox(height: 12),
+
+                    AnimationLimiter(
+                      child: LayoutBuilder(
+                        builder: (context, constraints) {
+                          int crossAxisCount = 4;
+                          if (constraints.maxWidth < 800) {
+                            crossAxisCount = 2;
+                          } else if (constraints.maxWidth < 1200) {
+                            crossAxisCount = 3;
+                          }
+
+                          return GridView.builder(
+                            shrinkWrap: true,
+                            physics: const NeverScrollableScrollPhysics(),
+                            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount: crossAxisCount,
+                              mainAxisExtent: 260,
+                              crossAxisSpacing: 16,
+                              mainAxisSpacing: 16,
+                            ),
+                            itemCount: projects.length,
+                            itemBuilder: (context, index) {
+                              final p = projects[index];
+                              return AnimationConfiguration.staggeredGrid(
+                                position: index,
+                                columnCount: crossAxisCount,
+                                duration: const Duration(milliseconds: 500),
+                                child: ScaleAnimation(
+                                  child: FadeInAnimation(
+                                    child: ProjectCard(
+                                      project: p,
+                                      onOpen: () =>
+                                          _showProjectDetails(context, p),
+                                    ),
+                                  ),
+                                ),
+                              );
+                            },
+                          );
+                        },
+                      ),
+                    ),
+
+                    const SizedBox(height: 40),
+
+                    /// ───────── SKILLS (NOW UNDER PROJECTS) ─────────
+                    const SectionTitle(id: 'skills', title: 'Skills & Experience'),
+                    const SizedBox(height: 12),
+                    const _SkillsCard(),
+
+                    const SizedBox(height: 40),
+
+                    /// ───────── CONTACT ─────────
+                    const SectionTitle(id: 'contact', title: 'Get in touch'),
+                    const SizedBox(height: 12),
+
                     Container(
                       padding: const EdgeInsets.all(20),
                       decoration: BoxDecoration(
@@ -379,43 +399,66 @@ Perfect for homeowners, interior designers, and furniture businesses — try bef
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Text('I’m available for freelance projects and Part-time roles.\nDrop me a message.'),
+                          const Text(
+                            'I’m available for freelance projects and Part-time roles.\nDrop me a message.',
+                          ),
                           const SizedBox(height: 12),
                           Wrap(
                             spacing: 12,
+                            runSpacing: 12,
                             children: [
                               FilledButton.icon(
-                                onPressed: () => _openUrl('mailto:shenawyomar2@gmail.com'),
+                                onPressed: () =>
+                                    _openUrl('mailto:shenawyomar2@gmail.com'),
                                 icon: const Icon(Icons.email_outlined),
                                 label: const Text('Email'),
                               ),
                               FilledButton.icon(
-                                onPressed: () => _openUrl('https://www.linkedin.com/in/omar-ahmed-20104a252/'),
+                                onPressed: () => _openUrl(
+                                  'https://www.linkedin.com/in/omar-ahmed-20104a252/',
+                                ),
                                 icon: const Icon(Icons.business_center),
                                 label: const Text('LinkedIn'),
                               ),
+                              FilledButton.icon(
+                                onPressed: () => _openUrl(
+                                  "https://wa.me/+201008653386?text=${Uri.encodeComponent(
+                                    "Hello Omar, I'd like to hire you.",
+                                  )}",
+                                ),
+                                icon: const Icon(Icons.phone),
+                                label: const Text('+201008653386'),
+                              ),
                             ],
-                          )
+                          ),
+
                         ],
                       ),
                     ),
 
                     const SizedBox(height: 60),
 
+                    /// ───────── FOOTER ─────────
                     Center(
-                      child: Text('© ${DateTime.now().year} Omar Ahmed — Built with Flutter',
-                          style: const TextStyle(fontSize: 12, color: Colors.white70)),
+                      child: Text(
+                        '© ${DateTime.now().year} Omar Ahmed — Built with Flutter',
+                        style: const TextStyle(
+                          fontSize: 12,
+                          color: Colors.white70,
+                        ),
+                      ),
                     ),
                     const SizedBox(height: 20),
                   ],
                 ),
               ),
             ),
-          )
+          ),
         ],
       ),
     );
   }
+
 
   void _showProjectDetails(BuildContext context, Project p) {
     showModalBottomSheet(
@@ -462,7 +505,7 @@ Perfect for homeowners, interior designers, and furniture businesses — try bef
                   const SizedBox(height: 12),
                   Wrap(spacing: 8, runSpacing: 8, children: [
                     ElevatedButton.icon(
-                        onPressed: () => (p.appUrl.isNotEmpty)? _openUrl(p.appUrl) : ScaffoldMessenger.of(context).showSnackBar( SnackBar(content: Text('No app available'))) ,
+                        onPressed: () => (p.appUrl.isNotEmpty)? _openUrl(p.appUrl) : ScaffoldMessenger.of(context).showSnackBar( SnackBar(content: Text('This app not available to install yet'))) ,
                         icon: const Icon(Icons.code),
                         label: const Text('link')
                     ),
@@ -557,55 +600,28 @@ class _IntroCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     DefaultTextStyle(
-                      style: const TextStyle(fontSize: 16, color: Colors.white70),
+                      style: const TextStyle(fontSize: 20, color: Colors.white70),
                       child: AnimatedTextKit(
                         isRepeatingAnimation: true,
                         repeatForever: true,
                         animatedTexts: [
+                          TyperAnimatedText('AI Engineer'),
                           TyperAnimatedText('Flutter Developer'),
                           TyperAnimatedText('Unity - 3D & AR'),
-                          TyperAnimatedText('AI trainee'),
                         ],
                       ),
                     ),
-                    const SizedBox(height: 8),
-                    LayoutBuilder(
-                      builder: (context, constraints) {
-                        final isMobile = constraints.maxWidth < 500; // tweak breakpoint as needed
-
-                        if (isMobile) {
-                          // MOBILE: buttons full-width, stacked
-                          return Column(
-                            crossAxisAlignment: CrossAxisAlignment.stretch,
-                            children: [
-                              ElevatedButton(
-                                onPressed: onHireTap,
-                                child: const Text('Contact me'),
-                              ),
-                              const SizedBox(height: 6),
-                              OutlinedButton(
-                                onPressed: () => _openUrl("https://drive.google.com/file/d/1k6EaY0WuVJvmMXCeaJqRfWy7I9fWT7xV/view"),
-                                child: const Text('Download CV', style: TextStyle(color: Colors.white)),
-                              ),
-                            ],
-                          );
-                        } else {
-                          // DESKTOP: buttons side by side in one row
-                          return Row(
-                            children: [
-                              ElevatedButton(
-                                onPressed: onHireTap,
-                                child: const Text('Contact me'),
-                              ),
-                              const SizedBox(width: 8),
-                              OutlinedButton(
-                                onPressed: () => _openUrl("https://drive.google.com/file/d/1k6EaY0WuVJvmMXCeaJqRfWy7I9fWT7xV/view"),
-                                child: const Text('Download CV', style: TextStyle(color: Colors.white)),
-                              ),
-                            ],
-                          );
-                        }
-                      },
+                    const SizedBox(height: 14),
+                    OutlinedButton(
+                      onPressed: () => _openUrl("https://drive.google.com/file/d/1kan6UafOk9tshzJx9HUAbYrPm_6HJ-ht/view?usp=sharing"),
+                      child: const Text('Download CV', style: TextStyle(color: Colors.white,fontSize: 17)),
+                      style: OutlinedButton.styleFrom(
+                        side: const BorderSide(color: Colors.white, width: 1.5),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 14),
+                      )
                     ),
 
                   ],
@@ -614,9 +630,11 @@ class _IntroCard extends StatelessWidget {
             ],
           ),
           const SizedBox(height: 16),
-          Text(
-            'I am building cross-platform applications while actively learning Artificial Intelligence to expand into intelligent systems development. I am seeking opportunities to apply and grow in software development and AI integration.',
-            style: const TextStyle(color: Colors.white70),
+          Center(
+            child: Text(
+              'I am Omar El-shenawy, AI engineer & Flutter developer start coding since school when my dad buy for me first laptop and i start my jorney\n \nNow I am building cross-platform applications linked with Artificial Intelligence to make intelligent systems development. I am seeking opportunities to apply and grow in software development and AI integration.',
+              style: const TextStyle(color: Colors.white70,fontSize: 17),
+            ),
           )
         ],
       ),
@@ -629,7 +647,7 @@ class _SkillsCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final skills = ['Flutter', 'Dart', 'Responsive design', 'Animations', 'Firebase integration', 'Maps integration', 'AI integration'];
+    final skills = ['computer vision', 'NLP', 'Transfer learning', 'Deep learning','Flutter', 'Dart', 'Responsive design', 'Animations', 'Firebase integration', 'Maps integration', 'AI integration'];
     return Container(
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
@@ -639,7 +657,7 @@ class _SkillsCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text('Skills', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600, color: Colors.white)),
+          const Text('Skills', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600, color: Colors.white)),
           const SizedBox(height: 12),
           Wrap(
             spacing: 8,
@@ -648,16 +666,16 @@ class _SkillsCard extends StatelessWidget {
                 .map((s) => Chip(
               label: Text(s),
               backgroundColor: Colors.green.shade600,
-              labelStyle: const TextStyle(color: Colors.white),
+              labelStyle: const TextStyle(color: Colors.white, fontSize: 16),
             ))
                 .toList(),
           ),
           const SizedBox(height: 12),
-          const Text('Experience', style: TextStyle(color: Colors.white70)),
+          const Text('Experience', style: TextStyle(color: Colors.white70,fontSize: 14)),
           const SizedBox(height: 6),
           LinearProgressIndicator(value: 0.8, backgroundColor: Colors.white10),
           const SizedBox(height: 8),
-          const Text('2+ years building apps', style: TextStyle(color: Colors.white70, fontSize: 12)),
+          const Text('2+ years building apps', style: TextStyle(color: Colors.white70, fontSize: 13)),
         ],
       ),
     );
@@ -734,9 +752,9 @@ class ProjectCard extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(project.title, style: const TextStyle(fontWeight: FontWeight.bold)),
+                    Text(project.title, style: const TextStyle(fontWeight: FontWeight.bold,fontSize: 17)),
                     const SizedBox(height: 6),
-                    Text(project.short, style: const TextStyle(color: Colors.white70, fontSize: 12)),
+                    Text(project.short, style: const TextStyle(color: Colors.white70, fontSize: 15)),
                   ],
                 ),
               )
