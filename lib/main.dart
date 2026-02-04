@@ -313,6 +313,7 @@ Perfect for homeowners, interior designers, and furniture businesses — try bef
   @override
   @override
   Widget build(BuildContext context) {
+    bool isTablet = MediaQuery.of(context).size.width > 600;
     return Scaffold(
       body: Stack(
         children: [
@@ -328,7 +329,7 @@ Perfect for homeowners, interior designers, and furniture businesses — try bef
           SafeArea(
             child: SingleChildScrollView(
               child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 28),
+                padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 22),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -336,10 +337,10 @@ Perfect for homeowners, interior designers, and furniture businesses — try bef
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        const Text(
+                        Text(
                           'Omar El-shenawy',
                           style: TextStyle(
-                            fontSize: 26,
+                            fontSize: isTablet ? 26 : 22,
                             fontWeight: FontWeight.bold,
                             color: Colors.white,
                           ),
@@ -355,13 +356,7 @@ Perfect for homeowners, interior designers, and furniture businesses — try bef
                     const SizedBox(height: 28),
 
                     /// ───────── INTRO ─────────
-                    _IntroCard(
-                      onHireTap: () => _openUrl(
-                        "https://wa.me/+201008653386?text=${Uri.encodeComponent(
-                          "Hello Omar, I'v offer for you.",
-                        )}",
-                      ),
-                    ),
+                    _IntroCard(isTablet: isTablet,),
 
                     const SizedBox(height: 40),
 
@@ -459,7 +454,7 @@ Perfect for homeowners, interior designers, and furniture businesses — try bef
                               FilledButton.icon(
                                 onPressed: () => _openUrl(
                                   "https://wa.me/+201008653386?text=${Uri.encodeComponent(
-                                    "Hello Omar, I'd like to hire you.",
+                                    "Hello Omar, I'v an offer for you.",
                                   )}",
                                 ),
                                 icon: const Icon(Icons.phone),
@@ -793,9 +788,10 @@ class _GradientPainter extends CustomPainter {
 }
 
 class _IntroCard extends StatelessWidget {
-  final VoidCallback onHireTap;
 
-  const _IntroCard({required this.onHireTap, super.key});
+  final bool isTablet;
+
+  const _IntroCard({required this.isTablet, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -832,7 +828,7 @@ class _IntroCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     DefaultTextStyle(
-                      style: const TextStyle(fontSize: 20, color: Colors.white70),
+                      style: TextStyle(fontSize: isTablet? 20 : 18, color: Colors.white70),
                       child: AnimatedTextKit(
                         isRepeatingAnimation: true,
                         repeatForever: true,
@@ -846,13 +842,13 @@ class _IntroCard extends StatelessWidget {
                     const SizedBox(height: 14),
                     OutlinedButton(
                       onPressed: () => _openUrl("https://drive.google.com/file/d/1kan6UafOk9tshzJx9HUAbYrPm_6HJ-ht/view?usp=sharing"),
-                      child: const Text('Download CV', style: TextStyle(color: Colors.white,fontSize: 17)),
+                      child:  Text('Download CV', style: TextStyle(color: Colors.white,fontSize: isTablet? 17 : 16)),
                       style: OutlinedButton.styleFrom(
                         side: const BorderSide(color: Colors.white, width: 1.5),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10),
                         ),
-                        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 14),
+                        padding:  EdgeInsets.symmetric(horizontal: isTablet? 20 : 18, vertical: isTablet? 14 : 13),
                       )
                     ),
 
@@ -865,7 +861,7 @@ class _IntroCard extends StatelessWidget {
           Center(
             child: Text(
               'I am Omar El-shenawy, AI engineer & Flutter developer start coding since school when my dad buy for me first laptop and i start my jorney\n \nNow I am building cross-platform applications linked with Artificial Intelligence to make intelligent systems development. I am seeking opportunities to apply and grow in software development and AI integration.',
-              style: const TextStyle(color: Colors.white70,fontSize: 17),
+              style:  TextStyle(color: Colors.white70,fontSize: isTablet? 17 : 15),
             ),
           )
         ],
