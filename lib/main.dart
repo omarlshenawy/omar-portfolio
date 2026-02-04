@@ -340,7 +340,7 @@ Perfect for homeowners, interior designers, and furniture businesses — try bef
                         Text(
                           'Omar El-shenawy',
                           style: TextStyle(
-                            fontSize: isTablet ? 26 : 22,
+                            fontSize: isTablet ? 26 : 20,
                             fontWeight: FontWeight.bold,
                             color: Colors.white,
                           ),
@@ -348,7 +348,7 @@ Perfect for homeowners, interior designers, and furniture businesses — try bef
                         ElevatedButton.icon(
                           onPressed: () => _openUrl('https://github.com/omarlshenawy'),
                           icon: const Icon(Icons.code),
-                          label: const Text('GitHub'),
+                          label:  Text('GitHub', style: TextStyle(fontSize: isTablet? 14 : 13)),
                         ),
                       ],
                     ),
@@ -842,13 +842,13 @@ class _IntroCard extends StatelessWidget {
                     const SizedBox(height: 14),
                     OutlinedButton(
                       onPressed: () => _openUrl("https://drive.google.com/file/d/1kan6UafOk9tshzJx9HUAbYrPm_6HJ-ht/view?usp=sharing"),
-                      child:  Text('Download CV', style: TextStyle(color: Colors.white,fontSize: isTablet? 17 : 16)),
+                      child:  Text('Download CV', style: TextStyle(color: Colors.white,fontSize: isTablet? 17 : 15)),
                       style: OutlinedButton.styleFrom(
                         side: const BorderSide(color: Colors.white, width: 1.5),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10),
                         ),
-                        padding:  EdgeInsets.symmetric(horizontal: isTablet? 20 : 18, vertical: isTablet? 14 : 13),
+                        padding:  EdgeInsets.symmetric(horizontal: isTablet? 20 : 16, vertical: isTablet? 14 : 12),
                       )
                     ),
 
@@ -1154,7 +1154,8 @@ cp -r build/web/* . -Force
 git add .
 git commit -m "Deploy Flutter web to GitHub Pages"
 git push origin main
-*/
+
+ */
 */
 
 
