@@ -1,5 +1,6 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
@@ -55,7 +56,7 @@ class _PortfolioHomePageState extends State<PortfolioHomePage> with SingleTicker
 
 With a clean interface, smart features, and scientifically backed guidance, our app helps you stay motivated and on track — no matter where you are in your fitness journey.
       ''',
-      imageAsset: 'assets/fit_logo.png',
+      imageAsset: 'assets/fit_logo.jpg',
       appUrl: '',
       videoUrl: 'https://drive.google.com/drive/folders/1xUg4ndi1_FurktByKGVea311oymUN_zJ',
       lang: 'Flutter',
@@ -245,6 +246,39 @@ Perfect for homeowners, interior designers, and furniture businesses — try bef
     ),
   ];
 
+  final List<Certificate> certifications = [
+    Certificate(
+      title: "AI fundmentals",
+      organization: "Cisco Netwoking academy",
+      date: "Dec 2025",
+      imageAsset: 'assets/cisco_ai.jpeg',
+      verifyUrl: 'https://www.credly.com/badges/38327e30-bcf1-4cdf-8603-477fa7d1e9a1/public_url',
+    ),
+    Certificate(
+      title: "machine learning",
+      organization: "National Telecommunication Institute",
+      date: "Aug 2025",
+      imageAsset: 'assets/machine_nti.jfif',
+      verifyUrl: null,
+    ),
+  ];
+
+  final List<Course> courses = [
+    Course(
+      title: "Mobile application",
+      platform: "Microsoft x Sprints",
+      duration: "40+ Hours",
+      imageAsset: 'assets/flutter_sprints.png',
+    ),
+    Course(
+      title: "Flutter & Dart Full Specialization",
+      platform: "Udemy",
+      duration: "+38 Hours",
+      imageAsset: 'assets/flutter_udemy.jpg',
+    ),
+
+  ];
+
   @override
   void initState() {
     super.initState();
@@ -294,7 +328,7 @@ Perfect for homeowners, interior designers, and furniture businesses — try bef
           SafeArea(
             child: SingleChildScrollView(
               child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 42, vertical: 32),
+                padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 28),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -305,7 +339,7 @@ Perfect for homeowners, interior designers, and furniture businesses — try bef
                         const Text(
                           'Omar El-shenawy',
                           style: TextStyle(
-                            fontSize: 20,
+                            fontSize: 26,
                             fontWeight: FontWeight.bold,
                             color: Colors.white,
                           ),
@@ -324,7 +358,7 @@ Perfect for homeowners, interior designers, and furniture businesses — try bef
                     _IntroCard(
                       onHireTap: () => _openUrl(
                         "https://wa.me/+201008653386?text=${Uri.encodeComponent(
-                          "Hello Omar, I'd like to hire you.",
+                          "Hello Omar, I'v offer for you.",
                         )}",
                       ),
                     ),
@@ -338,35 +372,37 @@ Perfect for homeowners, interior designers, and furniture businesses — try bef
                     AnimationLimiter(
                       child: LayoutBuilder(
                         builder: (context, constraints) {
-                          int crossAxisCount = 4;
-                          if (constraints.maxWidth < 800) {
-                            crossAxisCount = 2;
-                          } else if (constraints.maxWidth < 1200) {
+                          // Responsive column count
+                          int crossAxisCount = 1;
+                          if (constraints.maxWidth > 1200) {
+                            crossAxisCount = 4;
+                          } else if (constraints.maxWidth > 800) {
                             crossAxisCount = 3;
+                          } else if (constraints.maxWidth > 400) {
+                            crossAxisCount = 2;
                           }
 
-                          return GridView.builder(
+                          return AlignedGridView.count(
+                            crossAxisCount: crossAxisCount,
+                            mainAxisSpacing: 20,
+                            crossAxisSpacing: 20,
                             shrinkWrap: true,
                             physics: const NeverScrollableScrollPhysics(),
-                            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                              crossAxisCount: crossAxisCount,
-                              mainAxisExtent: 260,
-                              crossAxisSpacing: 16,
-                              mainAxisSpacing: 16,
-                            ),
                             itemCount: projects.length,
                             itemBuilder: (context, index) {
-                              final p = projects[index];
                               return AnimationConfiguration.staggeredGrid(
                                 position: index,
                                 columnCount: crossAxisCount,
                                 duration: const Duration(milliseconds: 500),
                                 child: ScaleAnimation(
                                   child: FadeInAnimation(
-                                    child: ProjectCard(
-                                      project: p,
-                                      onOpen: () =>
-                                          _showProjectDetails(context, p),
+                                    child: SizedBox(
+                                      // Use height: double.infinity logic inside AlignedGridView
+                                      // or let the intrinsic rendering of AlignedGridView handle it.
+                                      child: ProjectCard(
+                                        project: projects[index],
+                                        onOpen: () => _showProjectDetails(context, projects[index]),
+                                      ),
                                     ),
                                   ),
                                 ),
@@ -436,6 +472,77 @@ Perfect for homeowners, interior designers, and furniture businesses — try bef
                       ),
                     ),
 
+                    const SizedBox(height: 40),
+
+                    /// ───────── CERTIFICATIONS ─────────
+                    const SectionTitle(id: 'certs', title: 'Certifications'),
+                    const SizedBox(height: 12),
+
+                    LayoutBuilder(
+                      builder: (context, constraints) {
+                        int crossAxisCount = 1;
+                        if (constraints.maxWidth > 1200) {
+                          crossAxisCount = 3;
+                        } else if (constraints.maxWidth > 650) {
+                          crossAxisCount = 2;
+                        }
+                        return AlignedGridView.count(
+                          crossAxisCount: crossAxisCount,
+                          mainAxisSpacing: 20,
+                          crossAxisSpacing: 20,
+                          shrinkWrap: true,
+                          physics: const NeverScrollableScrollPhysics(),
+                          itemCount: certifications.length,
+                          itemBuilder: (context, index) {
+                            final cert = certifications[index];
+                            return AchievementCard(
+                              title: cert.title,
+                              subtitle: cert.organization,
+                              info: cert.date,
+                              imageAsset: cert.imageAsset,
+                              badgeText: "CERTIFIED",
+                              onTap: cert.verifyUrl != null ? () => _openUrl(cert.verifyUrl!) : null,
+                            );
+                          },
+                        );
+                      },
+                    ),
+
+                    const SizedBox(height: 40),
+
+                    /// ───────── COURSES ─────────
+                    const SectionTitle(id: 'courses', title: 'Courses Completed'),
+                    const SizedBox(height: 12),
+
+                    LayoutBuilder(
+                      builder: (context, constraints) {
+                        int crossAxisCount = 1;
+                        if (constraints.maxWidth > 1200) {
+                          crossAxisCount = 3;
+                        } else if (constraints.maxWidth > 650) {
+                          crossAxisCount = 2;
+                        }
+                        return AlignedGridView.count(
+                          crossAxisCount: crossAxisCount,
+                          mainAxisSpacing: 20,
+                          crossAxisSpacing: 20,
+                          shrinkWrap: true,
+                          physics: const NeverScrollableScrollPhysics(),
+                          itemCount: courses.length,
+                          itemBuilder: (context, index) {
+                            final course = courses[index];
+                            return AchievementCard(
+                              title: course.title,
+                              subtitle: course.platform,
+                              info: course.duration,
+                              imageAsset: course.imageAsset,
+                              badgeText: "COURSE",
+                            );
+                          },
+                        );
+                      },
+                    ),
+
                     const SizedBox(height: 60),
 
                     /// ───────── FOOTER ─────────
@@ -448,7 +555,8 @@ Perfect for homeowners, interior designers, and furniture businesses — try bef
                         ),
                       ),
                     ),
-                    const SizedBox(height: 20),
+
+                    const SizedBox(height: 40),
                   ],
                 ),
               ),
@@ -464,55 +572,179 @@ Perfect for homeowners, interior designers, and furniture businesses — try bef
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
-      backgroundColor: Colors.transparent,
+      backgroundColor: Colors.transparent, // Transparent to let our custom design show
       builder: (context) => DraggableScrollableSheet(
         expand: false,
-        initialChildSize: 0.7,
-        minChildSize: 0.4,
+        initialChildSize: 0.85, // Opens taller by default
+        minChildSize: 0.5,
         maxChildSize: 0.95,
         builder: (context, scrollController) {
           return Container(
-            decoration: const BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
-            ),
-            padding: const EdgeInsets.all(16),
-            child: SingleChildScrollView(
-              controller: scrollController,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Center(
-                      child: Container(
-                        width: 48,
-                        height: 6,
-                        decoration: BoxDecoration(
-                            color: Colors.black26,
-                            borderRadius: BorderRadius.circular(12)),
-                      )),
-                  const SizedBox(height: 12),
-                  Text(p.title, style: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold)),
-                  const SizedBox(height: 8),
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(12),
-                    child: AspectRatio(
-                      aspectRatio: 16 / 9,
-                      child: Image.asset(p.imageAsset, fit: BoxFit.contain, errorBuilder: (_, __, ___) => Container(color: Colors.grey[300])),
-                    ),
-                  ),
-                  const SizedBox(height: 12),
-                  Text(p.long),
-                  const SizedBox(height: 12),
-                  Wrap(spacing: 8, runSpacing: 8, children: [
-                    ElevatedButton.icon(
-                        onPressed: () => (p.appUrl.isNotEmpty)? _openUrl(p.appUrl) : ScaffoldMessenger.of(context).showSnackBar( SnackBar(content: Text('This app not available to install yet'))) ,
-                        icon: const Icon(Icons.code),
-                        label: const Text('link')
-                    ),
-                    OutlinedButton.icon(onPressed: () => _openUrl(p.videoUrl), icon: const Icon(Icons.open_in_new), label: const Text('Media')),
-                  ])
+            decoration: BoxDecoration(
+              // Dark background matching your theme logic (Dark Grey/Black mix)
+              gradient: LinearGradient(
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+                colors: [
+                  Colors.grey.shade900,
+                  Colors.black87,
                 ],
               ),
+              borderRadius: const BorderRadius.vertical(top: Radius.circular(32)),
+              border: Border.all(color: Colors.white.withOpacity(0.1), width: 1),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withOpacity(0.5),
+                  blurRadius: 20,
+                  spreadRadius: 5,
+                ),
+              ],
+            ),
+            child: Column(
+              children: [
+                // ───────── DRAG HANDLE ─────────
+                const SizedBox(height: 16),
+                Container(
+                  width: 50,
+                  height: 5,
+                  decoration: BoxDecoration(
+                      color: Colors.white24,
+                      borderRadius: BorderRadius.circular(10)),
+                ),
+                const SizedBox(height: 20),
+
+                // ───────── CONTENT ─────────
+                Expanded(
+                  child: ListView(
+                    controller: scrollController,
+                    padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 0),
+                    children: [
+                      // 1. Image with Shadow
+                      Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black.withOpacity(0.3),
+                              blurRadius: 15,
+                              offset: const Offset(0, 8),
+                            )
+                          ],
+                        ),
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(20),
+                          child: AspectRatio(
+                            aspectRatio: 16 / 9,
+                            child: Container(
+                              color: Colors.white.withOpacity(0.05),
+                              child: Image.asset(
+                                p.imageAsset,
+                                fit: BoxFit.contain,
+                                errorBuilder: (_, __, ___) =>
+                                    Container(color: Colors.grey[800]),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: 24),
+
+                      // 2. Title & Language Badge
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Expanded(
+                            child: Text(
+                              p.title,
+                              style: const TextStyle(
+                                fontSize: 28,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white,
+                                height: 1.1,
+                              ),
+                            ),
+                          ),
+                          Container(
+                            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                            decoration: BoxDecoration(
+                              color: Colors.green.withOpacity(0.2),
+                              borderRadius: BorderRadius.circular(20),
+                              border: Border.all(color: Colors.green.withOpacity(0.5)),
+                            ),
+                            child: Text(
+                              p.lang,
+                              style: const TextStyle(
+                                color: Colors.greenAccent,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 12,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 16),
+
+                      // 3. Buttons Row (Styled like Home)
+                      Row(
+                        children: [
+                          if (p.appUrl.isNotEmpty)
+                            Expanded(
+                              child: FilledButton.icon(
+                                onPressed: () => _openUrl(p.appUrl),
+                                style: FilledButton.styleFrom(
+                                  backgroundColor: Colors.white,
+                                  foregroundColor: Colors.black,
+                                  padding: const EdgeInsets.symmetric(vertical: 14),
+                                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                                ),
+                                icon: const Icon(Icons.download_rounded),
+                                label: const Text("Get App"),
+                              ),
+                            ),
+                          if (p.appUrl.isNotEmpty) const SizedBox(width: 12),
+                          Expanded(
+                            child: OutlinedButton.icon(
+                              onPressed: () => _openUrl(p.videoUrl),
+                              style: OutlinedButton.styleFrom(
+                                side: const BorderSide(color: Colors.white30),
+                                foregroundColor: Colors.white,
+                                padding: const EdgeInsets.symmetric(vertical: 14),
+                                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                              ),
+                              icon: const Icon(Icons.play_circle_outline),
+                              label: const Text("Demo Video"),
+                            ),
+                          ),
+                        ],
+                      ),
+
+                      const SizedBox(height: 24),
+                      const Divider(color: Colors.white10),
+                      const SizedBox(height: 16),
+
+                      // 4. Description
+                      const Text(
+                        "About this project",
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 18,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                      const SizedBox(height: 12),
+                      Text(
+                        p.long,
+                        style: TextStyle(
+                          fontSize: 15,
+                          height: 1.6,
+                          color: Colors.white.withOpacity(0.8),
+                        ),
+                      ),
+                      const SizedBox(height: 40), // Bottom padding
+                    ],
+                  ),
+                ),
+              ],
             ),
           );
         },
@@ -647,7 +879,7 @@ class _SkillsCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final skills = ['computer vision', 'NLP', 'Transfer learning', 'Deep learning','Flutter', 'Dart', 'Responsive design', 'Animations', 'Firebase integration', 'Maps integration', 'AI integration'];
+    final skills = ['computer vision', 'NLP', 'Transfer learning', 'Deep learning','Flutter', 'Dart', 'Responsive design', 'Animations', 'Firebase integration', 'state management', 'Maps integration', 'AI integration', 'Unity AR' ];
     return Container(
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
@@ -675,7 +907,7 @@ class _SkillsCard extends StatelessWidget {
           const SizedBox(height: 6),
           LinearProgressIndicator(value: 0.8, backgroundColor: Colors.white10),
           const SizedBox(height: 8),
-          const Text('2+ years building apps', style: TextStyle(color: Colors.white70, fontSize: 13)),
+          const Text('2+ years building AI apps', style: TextStyle(color: Colors.white70, fontSize: 13)),
         ],
       ),
     );
@@ -689,7 +921,7 @@ class SectionTitle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text(title, style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white));
+    return Text(title, style: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold, color: Colors.white));
   }
 }
 
@@ -716,52 +948,216 @@ class Project {
 class ProjectCard extends StatelessWidget {
   final Project project;
   final VoidCallback onOpen;
-  const ProjectCard({required this.project, required this.onOpen, super.key});
+
+  const ProjectCard({super.key, required this.project, required this.onOpen});
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
+    return InkWell(
       onTap: onOpen,
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(12),
-        child: Container(
-          color: Colors.white.withOpacity(0.03),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Expanded(
-                child: Stack(
-                  children: [
-                    Positioned.fill(
-                      child: Image.asset(project.imageAsset, fit: BoxFit.contain, errorBuilder: (_, __, ___) => Container(color: Colors.grey[300])),
-                    ),
-                    Positioned(
-                      right: 8,
-                      top: 8,
-                      child: Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
-                        decoration: BoxDecoration(color: Colors.black45, borderRadius: BorderRadius.circular(8)),
-                        child: Text(project.lang, style: const TextStyle(color: Colors.white, fontSize: 12)),
+      borderRadius: BorderRadius.circular(16),
+      child: Container(
+        constraints: const BoxConstraints(minHeight: 300),
+        decoration: BoxDecoration(
+          color: Colors.white.withOpacity(0.05),
+          borderRadius: BorderRadius.circular(16),
+          border: Border.all(color: Colors.white.withOpacity(0.1)),
+        ),
+        child: Stack(
+          children: [
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                // --- LOGO SECTION ---
+                Container(
+                  height: 160,
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                    color: Colors.black12.withAlpha(10),
+                    borderRadius: const BorderRadius.vertical(top: Radius.circular(16)),
+                  ),
+                  child: Image.asset(
+                    project.imageAsset,
+                    fit: BoxFit.contain,
+                  ),
+                ),
+
+                // --- TEXT SECTION ---
+                Padding(
+                  padding: const EdgeInsets.all(16),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Text(
+                        project.title,
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 18,
+                        ),
                       ),
-                    )
-                  ],
+                      const SizedBox(height: 10),
+                      Text(
+                        project.short,
+                        style: TextStyle(
+                          color: Colors.white.withOpacity(0.7),
+                          fontSize: 13,
+                          height: 1.5,
+                        ),
+                      ),
+                      const SizedBox(height: 40), // reserve space for badge overlay
+                    ],
+                  ),
+                ),
+              ],
+            ),
+
+            // --- Tech Badge overlay ---
+            Positioned(
+              bottom: 16, // fixed distance from bottom of the card
+              left: 16,   // fixed distance from left
+              child: Container(
+                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                decoration: BoxDecoration(
+                  color: Colors.green.withOpacity(0.4),
+                  borderRadius: BorderRadius.circular(6),
+                  border: Border.all(color: Colors.green.withOpacity(0.5)),
+                ),
+                child: Text(
+                  project.lang.toUpperCase(),
+                  style: const TextStyle(
+                    color: Colors.greenAccent,
+                    fontSize: 12,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.all(12.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(project.title, style: const TextStyle(fontWeight: FontWeight.bold,fontSize: 17)),
-                    const SizedBox(height: 6),
-                    Text(project.short, style: const TextStyle(color: Colors.white70, fontSize: 15)),
-                  ],
-                ),
-              )
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
   }
 }
+
+class Certificate {
+  final String title;
+  final String organization;
+  final String date;
+  final String imageAsset;
+  final String? verifyUrl;
+
+  Certificate({
+    required this.title,
+    required this.organization,
+    required this.date,
+    required this.imageAsset,
+    this.verifyUrl,
+  });
+}
+
+class Course {
+  final String title;
+  final String platform;
+  final String duration;
+  final String imageAsset;
+
+  Course({
+    required this.title,
+    required this.platform,
+    required this.duration,
+    required this.imageAsset,
+  });
+}
+
+class AchievementCard extends StatelessWidget {
+  final String title;
+  final String subtitle;
+  final String info;
+  final String imageAsset;
+  final String badgeText;
+  final VoidCallback? onTap;
+
+  const AchievementCard({
+    super.key,
+    required this.title,
+    required this.subtitle,
+    required this.info,
+    required this.imageAsset,
+    required this.badgeText,
+    this.onTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap: onTap,
+      borderRadius: BorderRadius.circular(16),
+      child: Container(
+        // Remove 'Expanded' and use 'IntrinsicHeight' if necessary,
+        // but usually just removing Expanded/Spacer from the Column works.
+        decoration: BoxDecoration(
+          color: Colors.white.withOpacity(0.05),
+          borderRadius: BorderRadius.circular(16),
+          border: Border.all(color: Colors.white.withOpacity(0.1)),
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min, // Tell the column to be as small as possible
+          children: [
+            // Image Section
+            Container(
+              padding: const EdgeInsets.all(4),
+              height: 300 ,
+              width: double.infinity,
+              decoration: const BoxDecoration(
+                color: Colors.black26,
+                borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
+              ),
+              child: ClipRRect(
+                borderRadius: const BorderRadius.vertical(top: Radius.circular(16)),
+                child: Image.asset(imageAsset, fit: BoxFit.fill, errorBuilder: (_, __, ___) => const Icon(Icons.image, color: Colors.white24)),
+              ),
+            ),
+            // Text Section
+            Padding(
+              padding: const EdgeInsets.all(12),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(title, style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 16)),
+                  const SizedBox(height: 4),
+                  Text(subtitle, style: TextStyle(color: Colors.greenAccent.withOpacity(0.8), fontSize: 13)),
+                  const SizedBox(height: 4),
+                  Text(info, style: TextStyle(color: Colors.white70, fontSize: 12)),
+                  const SizedBox(height: 12), // Use a fixed gap instead of Spacer()
+                  Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                    decoration: BoxDecoration(
+                      color: Colors.white10,
+                      borderRadius: BorderRadius.circular(6),
+                    ),
+                    child: Text(badgeText, style: const TextStyle(color: Colors.white, fontSize: 10)),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+/*
+git remote add origin git@github.com:omarlshenawy/omar-portfolio.git
+flutter build web --base-href /omar-portfolio/
+cp -r build/web/* . -Force
+git add .
+git commit -m
+git push origin master
+*/
+*/
+
+
