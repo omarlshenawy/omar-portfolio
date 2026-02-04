@@ -413,7 +413,7 @@ Perfect for homeowners, interior designers, and furniture businesses — try bef
                     /// ───────── SKILLS (NOW UNDER PROJECTS) ─────────
                     const SectionTitle(id: 'skills', title: 'Skills & Experience'),
                     const SizedBox(height: 12),
-                    const _SkillsCard(),
+                    _SkillsCard(isTablet: isTablet),
 
                     const SizedBox(height: 40),
 
@@ -422,7 +422,7 @@ Perfect for homeowners, interior designers, and furniture businesses — try bef
                     const SizedBox(height: 12),
 
                     Container(
-                      padding: const EdgeInsets.all(20),
+                      padding:  EdgeInsets.all(isTablet? 20 : 16),
                       decoration: BoxDecoration(
                         color: Colors.white.withOpacity(0.06),
                         borderRadius: BorderRadius.circular(16),
@@ -435,8 +435,8 @@ Perfect for homeowners, interior designers, and furniture businesses — try bef
                           ),
                           const SizedBox(height: 12),
                           Wrap(
-                            spacing: 12,
-                            runSpacing: 12,
+                            spacing: isTablet? 12 : 6,
+                            runSpacing: 10,
                             children: [
                               FilledButton.icon(
                                 onPressed: () =>
@@ -446,7 +446,7 @@ Perfect for homeowners, interior designers, and furniture businesses — try bef
                               ),
                               FilledButton.icon(
                                 onPressed: () => _openUrl(
-                                  'https://www.linkedin.com/in/omar-ahmed-20104a252/',
+                                  'https://www.linkedin.com/in/omar--elshenawy/',
                                 ),
                                 icon: const Icon(Icons.business_center),
                                 label: const Text('LinkedIn'),
@@ -478,7 +478,7 @@ Perfect for homeowners, interior designers, and furniture businesses — try bef
                         int crossAxisCount = 1;
                         if (constraints.maxWidth > 1200) {
                           crossAxisCount = 3;
-                        } else if (constraints.maxWidth > 650) {
+                        } else if (constraints.maxWidth > 580) {
                           crossAxisCount = 2;
                         }
                         return AlignedGridView.count(
@@ -871,7 +871,8 @@ class _IntroCard extends StatelessWidget {
 }
 
 class _SkillsCard extends StatelessWidget {
-  const _SkillsCard({super.key});
+  final bool isTablet;
+  const _SkillsCard({required this.isTablet, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -888,13 +889,15 @@ class _SkillsCard extends StatelessWidget {
           const Text('Skills', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600, color: Colors.white)),
           const SizedBox(height: 12),
           Wrap(
-            spacing: 8,
-            runSpacing: 8,
+            spacing: isTablet? 8 : 7,
+            runSpacing: isTablet? 8 : 8,
             children: skills
                 .map((s) => Chip(
               label: Text(s),
               backgroundColor: Colors.green.shade600,
-              labelStyle: const TextStyle(color: Colors.white, fontSize: 16),
+              labelStyle:  TextStyle(color: Colors.white, fontSize: isTablet? 16 : 14),
+              padding: EdgeInsets.symmetric(horizontal: isTablet? 8 : 4,vertical: isTablet? 8 : 6),
+
             ))
                 .toList(),
           ),
@@ -1105,7 +1108,7 @@ class AchievementCard extends StatelessWidget {
             // Image Section
             Container(
               padding: const EdgeInsets.all(4),
-              height: 300 ,
+              height: 250 ,
               width: double.infinity,
               decoration: const BoxDecoration(
                 color: Colors.black26,
