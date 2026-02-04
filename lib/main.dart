@@ -1157,7 +1157,7 @@ cp -r build/web/* . -Force
 
 git add .
 git commit -m "Deploy Flutter web to GitHub Pages"
-git push origin master
+git push origin main
 */
 */
 
