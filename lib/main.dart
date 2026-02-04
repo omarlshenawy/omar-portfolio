@@ -1151,11 +1151,12 @@ class AchievementCard extends StatelessWidget {
 }
 
 /*
-git remote add origin git@github.com:omarlshenawy/omar-portfolio.git
 flutter build web --base-href /omar-portfolio/
+
 cp -r build/web/* . -Force
+
 git add .
-git commit -m
+git commit -m "Deploy Flutter web to GitHub Pages"
 git push origin master
 */
 */
