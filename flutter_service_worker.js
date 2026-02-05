@@ -3,10 +3,10 @@ const MANIFEST = 'flutter-app-manifest';
 const TEMP = 'flutter-temp-cache';
 const CACHE_NAME = 'flutter-app-cache';
 
-const RESOURCES = {"assets/AssetManifest.bin": "cd555ea741619ebdace28ac4899ee674",
-"assets/AssetManifest.bin.json": "b5b4b92fe917260f15d75f5fef7820b1",
+const RESOURCES = {"assets/AssetManifest.bin": "8b3c3212e96438394f77b84e37babec5",
+"assets/AssetManifest.bin.json": "ede5be7bf65d493a09a81ec641fe4d72",
 "assets/assets/ar_logo.png": "1302267e6aa05a58c905dd00d10dbeb1",
-"assets/assets/avatar.jpg": "0209d9cf845575514dd68d595d433e2e",
+"assets/assets/avatar.jpeg": "1c0de8df635da4ca0a7ec95c74e43263",
 "assets/assets/cisco_ai.jpeg": "95dee5c29e0ae861bb7e3a314ff5aa87",
 "assets/assets/fit_logo.jpg": "4fa3a1e03a856e570558cc9c27eaa34d",
 "assets/assets/flutter_sprints.png": "c97dfaa51963dfd2341a4e1a98e8dce3",
@@ -38,14 +38,14 @@ const RESOURCES = {"assets/AssetManifest.bin": "cd555ea741619ebdace28ac4899ee674
 "canvaskit/skwasm_heavy.wasm": "b0be7910760d205ea4e011458df6ee01",
 "favicon.png": "5dcef449791fa27946b3d35ad8803796",
 "flutter.js": "24bc71911b75b5f8135c949e27a2984e",
-"flutter_bootstrap.js": "e90489555668e47c58a76cade4a07e24",
+"flutter_bootstrap.js": "9bdb3a353a38b18039ae3811e92f4afb",
 "icons/Icon-192.png": "ac9a721a12bbc803b44f645561ecb1e1",
 "icons/Icon-512.png": "96e752610906ba2a93c65f8abe1645f1",
 "icons/Icon-maskable-192.png": "c457ef57daa1d16f64b27b786ec2ea3c",
 "icons/Icon-maskable-512.png": "301a7604d45b3e739efc881eb04896ea",
 "index.html": "9f3fa44f8a152e77295d5396d93d09ea",
 "/": "9f3fa44f8a152e77295d5396d93d09ea",
-"main.dart.js": "75ed49e0d80826216a62e71e5ecfc800",
+"main.dart.js": "994bc3ebfe894b7461eadacbf5c02f04",
 "manifest.json": "d40c47d1c161f94dbcb13094d37f1f55",
 "version.json": "009c9e65172e010890f7f65fde438006"};
 // The application shell files that are downloaded before a service worker can

@@ -69255,7 +69255,7 @@ p.drawCircle(k*m,j*(0.2+n*0.12),40+80*(n/6),l)
 l.delete()}},
 ip(a){return a.b!==this.b}}
 A.KI.prototype={
-N(a){var s,r,q,p,o,n=null,m=A.aH(15,B.f.B()>>>16&255,B.f.B()>>>8&255,B.f.B()&255),l=A.d3(16),k=A.ajj(A.RN(A.d3(12),A.Vt("assets/avatar.jpg",new A.a92(),B.xw,120,120)),"avatar",!1),j=this.c,i=A.eq(n,n,B.y,n,n,n,n,n,n,n,n,j?20:18,n,n,n,n,n,!0,n,n,n,n,n,n,n,n)
+N(a){var s,r,q,p,o,n=null,m=A.aH(15,B.f.B()>>>16&255,B.f.B()>>>8&255,B.f.B()&255),l=A.d3(16),k=A.ajj(A.RN(A.d3(12),A.Vt("assets/avatar.jpeg",new A.a92(),B.xw,120,120)),"avatar",!1),j=this.c,i=A.eq(n,n,B.y,n,n,n,n,n,n,n,n,j?20:18,n,n,n,n,n,!0,n,n,n,n,n,n,n,n)
 i=A.oC(new A.rG(A.c([A.agr("AI Engineer"),A.agr("Flutter Developer"),A.agr("Unity - 3D & AR")],t.u6),!0,!0,n),n,B.cz,!0,i,n,n,B.aO)
 s=A.dD("Download CV",A.eq(n,n,B.f,n,n,n,n,n,n,n,n,j?17:15,n,n,n,n,n,!0,n,n,n,n,n,n,n,n),n)
 r=A.d3(10)
@@ -69263,7 +69263,7 @@ q=j?20:16
 p=j?14:12
 o=t.E
 s=A.kC(A.c([k,B.JN,A.u7(A.iL(A.c([i,B.JP,new A.vM(!1,new A.a93(new A.a91(a)),n,n,n,A.akb(n,n,n,n,n,n,n,n,n,n,n,n,new A.aD(q,p,q,p),n,new A.cd(r,B.q),B.xk,n,n,n,n),n,n,!1,n,n,s,n)],o),B.ae,B.al))],o),B.ay,B.aN,B.al,0)
-return A.dr(A.iL(A.c([s,B.fp,A.ol(A.dD("I am Omar El-shenawy, AI engineer & Flutter developer start coding since school when my dad buy for me first laptop and i start my jorney\n \nNow I am building cross-platform applications linked with Artificial Intelligence to make intelligent systems development. I am seeking opportunities to apply and grow in software development and AI integration.",A.eq(n,n,B.y,n,n,n,n,n,n,n,n,j?17:15,n,n,n,n,n,!0,n,n,n,n,n,n,n,n),n),n,n)],o),B.ae,B.al),n,n,new A.c3(m,n,n,l,n,n,B.W),n,n,B.kX,n)}}
+return A.dr(A.iL(A.c([s,B.fp,A.ol(A.dD("I am Omar El-shenawy, AI engineer & Flutter developer start coding since school when my dad buy for me first laptop and i start my jorney.\n\nI specialize in building cross-platform applications that are integrated with Artificial Intelligence, delivering smart, efficient, and scalable systems. My work focuses on providing seamless user experiences, implementing AI-driven features, and ensuring high performance. I am constantly learning and exploring new technologies to enhance my skills and stay at the forefront of software development and AI integration.",A.eq(n,n,B.y,n,n,n,n,n,n,n,n,j?17:15,n,n,n,n,n,!0,n,n,n,n,n,n,n,n),n),n,n)],o),B.ae,B.al),n,n,new A.c3(m,n,n,l,n,n,B.W),n,n,B.kX,n)}}
 A.a91.prototype={
 P8(a){var s=0,r=A.O(t.H),q=this
 var $async$$1=A.K(function(b,c){if(b===1)return A.L(c,r)
@@ -69279,7 +69279,7 @@ $3(a,b,c){var s=null
 return A.dr(s,B.FO,s,s,96,s,s,96)},
 $S:163}
 A.a93.prototype={
-$0(){return this.a.$1("https://drive.google.com/file/d/1kan6UafOk9tshzJx9HUAbYrPm_6HJ-ht/view?usp=sharing")},
+$0(){return this.a.$1("https://drive.google.com/file/d/1kVjjFv-sSbuiTFhJPOe232gK8fsCUJGZ/view?usp=sharing")},
 $S:0}
 A.Nz.prototype={
 N(a){var s=null,r=A.c(["computer vision","NLP","Transfer learning","Deep learning","Flutter","Dart","Responsive design","Animations","Firebase integration","state management","Maps integration","AI integration","Unity AR"],t.s),q=A.aH(10,B.f.B()>>>16&255,B.f.B()>>>8&255,B.f.B()&255),p=A.d3(16),o=this.c?8:7,n=t.sI
@@ -69303,7 +69303,7 @@ return A.VN(!1,o,!0,A.dr(A.pR(B.cI,A.c([k,A.afX(16,A.dr(A.dD(j.r.toUpperCase(),B
 A.tb.prototype={}
 A.tu.prototype={}
 A.o4.prototype={
-N(a){var s=this,r=null,q=A.d3(16),p=A.aH(13,B.f.B()>>>16&255,B.f.B()>>>8&255,B.f.B()&255),o=A.d3(16),n=A.C6(A.aH(B.c.au(25.5),B.f.B()>>>16&255,B.f.B()>>>8&255,B.f.B()&255),1),m=A.dr(A.RN(B.fU,A.Vt(s.f,new A.Qj(),B.xv,r,r)),r,r,B.xu,250,r,B.AQ,1/0),l=A.dD(s.c,B.Of,r),k=A.dD(s.d,A.eq(r,r,A.aH(204,B.eS.B()>>>16&255,B.eS.B()>>>8&255,B.eS.B()&255),r,r,r,r,r,r,r,r,13,r,r,r,r,r,!0,r,r,r,r,r,r,r,r),r),j=A.dD(s.e,A.eq(r,r,B.y,r,r,r,r,r,r,r,r,12,r,r,r,r,r,!0,r,r,r,r,r,r,r,r),r),i=A.d3(6),h=t.E
+N(a){var s=this,r=null,q=A.d3(16),p=A.aH(13,B.f.B()>>>16&255,B.f.B()>>>8&255,B.f.B()&255),o=A.d3(16),n=A.C6(A.aH(B.c.au(25.5),B.f.B()>>>16&255,B.f.B()>>>8&255,B.f.B()&255),1),m=A.dr(A.RN(B.fU,A.Vt(s.f,new A.Qj(),B.xv,r,r)),r,r,B.xu,280,r,B.AQ,1/0),l=A.dD(s.c,B.Of,r),k=A.dD(s.d,A.eq(r,r,A.aH(204,B.eS.B()>>>16&255,B.eS.B()>>>8&255,B.eS.B()&255),r,r,r,r,r,r,r,r,13,r,r,r,r,r,!0,r,r,r,r,r,r,r,r),r),j=A.dD(s.e,A.eq(r,r,B.y,r,r,r,r,r,r,r,r,12,r,r,r,r,r,!0,r,r,r,r,r,r,r,r),r),i=A.d3(6),h=t.E
 return A.VN(!1,q,!0,A.dr(A.iL(A.c([m,new A.dy(B.AI,A.iL(A.c([l,B.w5,k,B.w5,j,B.b0,A.dr(A.dD(s.r,B.My,r),r,r,new A.c3(B.hf,r,r,i,r,r,B.W),r,r,B.hA,r)],h),B.ae,B.al),r)],h),B.ae,B.cg),r,r,new A.c3(p,r,n,o,r,r,B.W),r,r,r,r),r,!0,r,r,r,r,r,r,r,s.w,r,r,r,r,r,r)}}
 A.Qj.prototype={
 $3(a,b,c){return B.BA},

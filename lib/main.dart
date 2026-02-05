@@ -819,7 +819,7 @@ class _IntroCard extends StatelessWidget {
                 tag: 'avatar',
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(12),
-                  child: Image.asset('assets/avatar.jpg', width: 120, height: 120, fit: BoxFit.cover, errorBuilder: (_, __, ___) => Container(width: 96, height: 96, color: Colors.grey)),
+                  child: Image.asset('assets/avatar.jpeg', width: 120, height: 120, fit: BoxFit.cover, errorBuilder: (_, __, ___) => Container(width: 96, height: 96, color: Colors.grey)),
                 ),
               ),
               const SizedBox(width: 16),
@@ -841,7 +841,7 @@ class _IntroCard extends StatelessWidget {
                     ),
                     const SizedBox(height: 14),
                     OutlinedButton(
-                      onPressed: () => _openUrl("https://drive.google.com/file/d/1kan6UafOk9tshzJx9HUAbYrPm_6HJ-ht/view?usp=sharing"),
+                      onPressed: () => _openUrl("https://drive.google.com/file/d/1kVjjFv-sSbuiTFhJPOe232gK8fsCUJGZ/view?usp=sharing"),
                       child:  Text('Download CV', style: TextStyle(color: Colors.white,fontSize: isTablet? 17 : 15)),
                       style: OutlinedButton.styleFrom(
                         side: const BorderSide(color: Colors.white, width: 1.5),
@@ -860,7 +860,7 @@ class _IntroCard extends StatelessWidget {
           const SizedBox(height: 16),
           Center(
             child: Text(
-              'I am Omar El-shenawy, AI engineer & Flutter developer start coding since school when my dad buy for me first laptop and i start my jorney\n \nNow I am building cross-platform applications linked with Artificial Intelligence to make intelligent systems development. I am seeking opportunities to apply and grow in software development and AI integration.',
+                'I am Omar El-shenawy, AI engineer & Flutter developer start coding since school when my dad buy for me first laptop and i start my jorney.\n\nI specialize in building cross-platform applications that are integrated with Artificial Intelligence, delivering smart, efficient, and scalable systems. My work focuses on providing seamless user experiences, implementing AI-driven features, and ensuring high performance. I am constantly learning and exploring new technologies to enhance my skills and stay at the forefront of software development and AI integration.',
               style:  TextStyle(color: Colors.white70,fontSize: isTablet? 17 : 15),
             ),
           )
@@ -1108,7 +1108,7 @@ class AchievementCard extends StatelessWidget {
             // Image Section
             Container(
               padding: const EdgeInsets.all(4),
-              height: 250 ,
+              height: 280 ,
               width: double.infinity,
               decoration: const BoxDecoration(
                 color: Colors.black26,
