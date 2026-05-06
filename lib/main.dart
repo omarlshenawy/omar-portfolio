@@ -61,7 +61,7 @@ Key Features:
  
 This project demonstrates strong skills in computer vision, deep learning, and full pipeline development — from preprocessing and model design to deployment with an interactive UI.
   ''',
-      imageAsset: 'assets/ai_body.jpg',
+      imageAsset: 'assets/ai_body.png',
       appUrl: 'https://huggingface.co/spaces/iof2eagle/body',
       videoUrl: 'https://drive.google.com/file/d/1gJk_OEWnEzNK00eBXiYHHxWh4JoSbGai/view?usp=sharing',
       lang: 'computer vision',
@@ -94,7 +94,7 @@ Key Features:
 
 This project demonstrates strong expertise in NLP, transformer models, and end-to-end machine learning workflows — from data exploration to production-ready inference.
   ''',
-      imageAsset: 'assets/phishing_ai.jpg',
+      imageAsset: 'assets/phishing_ai.png',
       appUrl: 'https://huggingface.co/spaces/iof2eagle/emails_phising',
       videoUrl: 'https://www.linkedin.com/posts/omar--elshenawy_ai-machinelearning-deeplearning-activity-7450638731327381505-wby5?utm_source=li_share&utm_content=feedcontent&utm_medium=g_dt_web&utm_campaign=copy',
       lang: 'NLP',
@@ -1115,6 +1115,7 @@ class Certificate {
     this.verifyUrl,
   });
 }
+
 
 class Course {
   final String title;

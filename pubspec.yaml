@@ -78,6 +78,8 @@ flutter:
    - assets/cisco_ai.jpeg
    - assets/flutter_sprints.png
    - assets/machine_nti.jfif
+   - assets/phishing_ai.png
+   - assets/ai_body.png
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
