@@ -39,6 +39,67 @@ class _PortfolioHomePageState extends State<PortfolioHomePage> with SingleTicker
   late final AnimationController _bgController;
 
   final List<Project> projects = [
+
+    Project(
+      title: "AI Body Measurements using ResNet34",
+      short: 'Computer vision app that predicts full body measurements from front and side images using deep learning.',
+      long: '''Estimate human body measurements instantly using AI and computer vision. This project leverages deep learning models to analyze front and side images of a person and generate accurate body measurements without manual input.
+
+Built using PyTorch and advanced image processing techniques, the system combines semantic segmentation and regression modeling to isolate the human body and predict key physical dimensions.
+
+Key Features:
+
+ - AI-Powered Measurement Prediction – Predicts 14 body measurements including chest, waist, height, and limb sizes.
+ 
+ - Dual-Image Input (Front & Side) – Improves accuracy by analyzing the body from multiple perspectives.
+ 
+ - Person Segmentation – Uses DeepLabV3 to isolate the human body from the background before processing.
+ 
+ - Custom ResNet34 Regression Model – Fine-tuned deep learning model for precise measurement estimation.
+ 
+ - Image Preprocessing Pipeline – Includes masking, grayscale conversion, and normalization for optimal model performance.
+ 
+This project demonstrates strong skills in computer vision, deep learning, and full pipeline development — from preprocessing and model design to deployment with an interactive UI.
+  ''',
+      imageAsset: 'assets/ai_body.jpg',
+      appUrl: 'https://huggingface.co/spaces/iof2eagle/body',
+      videoUrl: 'https://drive.google.com/file/d/1gJk_OEWnEzNK00eBXiYHHxWh4JoSbGai/view?usp=sharing',
+      lang: 'computer vision',
+    ),
+
+    Project(
+      title: "Phishing Email Detection using BERT",
+      short: 'AI-powered NLP model that detects phishing emails with 99% accuracy using fine-tuned BERT.',
+      long: '''Detect phishing emails with high precision using state-of-the-art Natural Language Processing. This project leverages a fine-tuned BERT model to classify emails as legitimate or phishing, achieving outstanding performance on real-world datasets.
+
+The system was carefully designed to preserve critical phishing indicators (such as URLs, symbols, and formatting) rather than removing them during preprocessing — improving model accuracy and realism.
+
+Key Features:
+
+ - High Accuracy Model – Achieves ~99% accuracy, precision, recall, and F1-score on test data.
+ 
+ - BERT-Based Classification – Utilizes a pretrained transformer (bert-base-uncased) fine-tuned for binary classification.
+ 
+ - Smart Preprocessing Strategy – Keeps important phishing signals like URLs, special characters, and formatting instead of removing them.
+ 
+ - Full NLP Pipeline – Includes data cleaning, tokenization, dataset preparation, training, evaluation, and inference.
+ 
+ - Data Visualization & Analysis – Explores dataset patterns using Seaborn, word clouds, and statistical plots.
+ 
+ - Custom Training Pipeline – Built with Hugging Face Trainer API for efficient training and evaluation.
+ 
+ - Real-Time Prediction Function – Classifies input text into SAFE 🟢, SUSPICIOUS 🟡, or PHISHING 🔴 with probability scores.
+ 
+ - Model Persistence – Saves and reloads trained model and tokenizer for deployment.
+
+This project demonstrates strong expertise in NLP, transformer models, and end-to-end machine learning workflows — from data exploration to production-ready inference.
+  ''',
+      imageAsset: 'assets/phishing_ai.jpg',
+      appUrl: 'https://huggingface.co/spaces/iof2eagle/emails_phising',
+      videoUrl: 'https://www.linkedin.com/posts/omar--elshenawy_ai-machinelearning-deeplearning-activity-7450638731327381505-wby5?utm_source=li_share&utm_content=feedcontent&utm_medium=g_dt_web&utm_campaign=copy',
+      lang: 'NLP',
+    ),
+
     Project(
       title: "FitAItion",
       short: 'All-in-one fitness companion with nutrition plans, exercise guides, trackers, and smart alternatives.',
@@ -346,9 +407,9 @@ Perfect for homeowners, interior designers, and furniture businesses — try bef
                           ),
                         ),
                         ElevatedButton.icon(
-                          onPressed: () => _openUrl('https://github.com/omarlshenawy'),
+                          onPressed: () => _openUrl('https://huggingface.co/iof2eagle'),
                           icon: const Icon(Icons.code),
-                          label:  Text('GitHub', style: TextStyle(fontSize: isTablet? 14 : 13)),
+                          label:  Text('Hugging face', style: TextStyle(fontSize: isTablet? 14 : 13)),
                         ),
                       ],
                     ),
@@ -448,7 +509,7 @@ Perfect for homeowners, interior designers, and furniture businesses — try bef
                                 onPressed: () => _openUrl(
                                   'https://www.linkedin.com/in/omar--elshenawy/',
                                 ),
-                                icon: const Icon(Icons.business_center),
+                                icon: const Icon(Icons.business_center_outlined),
                                 label: const Text('LinkedIn'),
                               ),
                               FilledButton.icon(
@@ -457,7 +518,7 @@ Perfect for homeowners, interior designers, and furniture businesses — try bef
                                     "Hello Omar, I'v an offer for you.",
                                   )}",
                                 ),
-                                icon: const Icon(Icons.phone),
+                                icon: const Icon(Icons.message_outlined),
                                 label: const Text('+201008653386'),
                               ),
                             ],
@@ -692,8 +753,8 @@ Perfect for homeowners, interior designers, and furniture businesses — try bef
                                   padding: const EdgeInsets.symmetric(vertical: 14),
                                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
                                 ),
-                                icon: const Icon(Icons.download_rounded),
-                                label: const Text("Get App"),
+                                icon: const Icon(Icons.approval),
+                                label: const Text("Try it"),
                               ),
                             ),
                           if (p.appUrl.isNotEmpty) const SizedBox(width: 12),
@@ -707,7 +768,7 @@ Perfect for homeowners, interior designers, and furniture businesses — try bef
                                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
                               ),
                               icon: const Icon(Icons.play_circle_outline),
-                              label: const Text("Demo Video"),
+                              label: const Text("Demo"),
                             ),
                           ),
                         ],
@@ -835,7 +896,6 @@ class _IntroCard extends StatelessWidget {
                         animatedTexts: [
                           TyperAnimatedText('AI Engineer'),
                           TyperAnimatedText('Flutter Developer'),
-                          TyperAnimatedText('Unity - 3D & AR'),
                         ],
                       ),
                     ),
