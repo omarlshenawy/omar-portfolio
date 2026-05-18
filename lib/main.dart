@@ -535,7 +535,7 @@ Perfect for homeowners, interior designers, and furniture businesses — try bef
 
                                 const SizedBox(width: 16),
 
-                                if (item.verifyUrl != null)
+                                if (item.images.length > 1)
                                 // Next Button
                                   _buildNavButton(
                                     icon: Icons.chevron_right,
