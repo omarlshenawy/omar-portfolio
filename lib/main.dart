@@ -535,22 +535,23 @@ Perfect for homeowners, interior designers, and furniture businesses — try bef
 
                                 const SizedBox(width: 16),
 
+                                if (item.images.length > 1)
                                 // Next Button
-                                _buildNavButton(
-                                  icon: Icons.chevron_right,
-                                  enabled: currentPage <
-                                      item.images.length - 1,
-                                  onTap: () {
-                                    if (currentPage <
-                                        item.images.length - 1) {
-                                      pageController.nextPage(
-                                        duration: const Duration(
-                                            milliseconds: 300),
-                                        curve: Curves.easeInOut,
-                                      );
-                                    }
-                                  },
-                                ),
+                                  _buildNavButton(
+                                    icon: Icons.chevron_right,
+                                    enabled: currentPage <
+                                        item.images.length - 1,
+                                    onTap: () {
+                                      if (currentPage <
+                                          item.images.length - 1) {
+                                        pageController.nextPage(
+                                          duration: const Duration(
+                                              milliseconds: 300),
+                                          curve: Curves.easeInOut,
+                                        );
+                                      }
+                                    },
+                                  ),
 
                               ],
                             ),

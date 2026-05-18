@@ -74023,7 +74023,8 @@ j=h.a
 i=h.b
 o.push(A.kc(A.DQ(m,A.dg(new A.wB(k,new A.acX(j,b),new A.y1(new A.acY(i,r),n.length,!0,!0,!0,g),g),l,g,g,g,g,g,g))))
 o.push(B.jx)
-o.push(i.Hy(j.a<n.length-1,B.BY,new A.acZ(j,r,k)))
+m=n.length
+if(m>1)o.push(i.Hy(j.a<m-1,B.BY,new A.acZ(j,r,k)))
 o=A.kc(new A.d9(B.lg,A.ip(o,B.ao,B.aD,B.ak,0),g))
 n=n.length
 p=A.c([new A.d9(B.hR,p,g),o,A.eV(new A.vL(new A.y1(new A.ad_(j,i,k,r),n,!0,!0,!0,g),B.lg,B.am,!1,g,g,g,!1,g,n,B.ap,g,g,B.a0,B.a4,g),90,g),new A.d9(B.Bb,A.dk(""+(j.a+1)+" / "+n,g,g,B.wR,g),g)],q)
