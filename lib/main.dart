@@ -1,4 +1,5 @@
 import 'dart:math';
+import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -307,37 +308,64 @@ Perfect for homeowners, interior designers, and furniture businesses — try bef
     ),
   ];
 
-  final List<Certificate> certifications = [
-    Certificate(
-      title: "AI fundmentals",
-      organization: "Cisco Netwoking academy",
-      date: "Dec 2025",
-      imageAsset: 'assets/cisco_ai.jpeg',
-      verifyUrl: 'https://www.credly.com/badges/38327e30-bcf1-4cdf-8603-477fa7d1e9a1/public_url',
-    ),
-    Certificate(
-      title: "machine learning",
-      organization: "National Telecommunication Institute",
-      date: "Aug 2025",
-      imageAsset: 'assets/machine_nti.jfif',
+  // ─────────────────────────────────────────────────────────────
+// DATA
+// Put courses and certificates together
+// ─────────────────────────────────────────────────────────────
+
+  final List<AchievementItem> achievements = [
+
+    AchievementItem(
+      title: "computer vision crash course",
+      organization: "orange digital center",
+      date: "28 Hours",
+      images: [
+        "https://drive.google.com/file/d/1USchWPdI1472Qi5an8auYTdtgGAZQNe_/view?usp=sharing",
+      ],
       verifyUrl: null,
     ),
-  ];
 
-  final List<Course> courses = [
-    Course(
-      title: "Mobile application",
-      platform: "Microsoft x Sprints",
-      duration: "40+ Hours",
-      imageAsset: 'assets/flutter_sprints.png',
+    AchievementItem(
+      title: "Machine Learning",
+      organization: "National Telecommunication Institute",
+      date: "72 Hours",
+      images: [
+        "https://drive.google.com/file/d/1mm-ectUNfzKeegTw8Iv3toClv9C-wJIP/view?usp=sharing",
+      ],
+      verifyUrl: null,
     ),
-    Course(
+
+    AchievementItem(
+      title: "AI Fundamentals",
+      organization: "Cisco Networking Academy",
+      date: "10 Hours",
+      images: [
+        "https://drive.google.com/file/d/1nhiLLcwAQL2nMptQptxIaaqWboI1mN8H/view?usp=sharing",
+      ],
+      verifyUrl:
+      "https://www.credly.com/badges/38327e30-bcf1-4cdf-8603-477fa7d1e9a1/public_url",
+    ),
+
+    AchievementItem(
       title: "Flutter & Dart Full Specialization",
-      platform: "Udemy",
-      duration: "+38 Hours",
-      imageAsset: 'assets/flutter_udemy.jpg',
+      organization: "Udemy",
+      date: "38 Hours",
+      images: [
+        "https://drive.google.com/file/d/1eCGF2LF8TqrvC4a_Gat6SeLX2QHM7YVk/view?usp=sharing",
+        "https://drive.google.com/file/d/14nL0STeJf3hs_C9hEDI2PACjeBWsRP91/view?usp=sharing",
+        "https://drive.google.com/file/d/1bdQK8-qpwyeVBouqewd8w_G5cZgzCanK/view?usp=sharing",
+        "https://drive.google.com/file/d/1QonuJk6Yw3bt3s0UpuVB_6_gJX65PHDZ/view?usp=sharing",
+      ],
     ),
 
+    AchievementItem(
+      title: "Mobile Application Development",
+      organization: "Microsoft × Sprints",
+      date: "40 Hours",
+      images: [
+        "https://drive.google.com/file/d/1SeocbHIVtjy1FTKylQYINnrYz-r_zBKA/view?usp=sharing",
+      ],
+    ),
   ];
 
   @override
@@ -371,7 +399,303 @@ Perfect for homeowners, interior designers, and furniture businesses — try bef
     }
   }
 
-  @override
+  String? convertDriveLinkToThumbnail(String shareLink) {
+    // Regex to capture the file ID between /d/ and the next slash or question mark
+    final RegExp regExp = RegExp(r'\/d\/([a-zA-Z0-9-_]+)');
+    final Match? match = regExp.firstMatch(shareLink);
+
+    if (match != null && match.groupCount >= 1) {
+      final String fileId = match.group(1)!;
+      // Returns the high-resolution thumbnail endpoint (1200px wide)
+      return 'https://drive.google.com/thumbnail?id=$fileId&sz=w1200';
+    }
+
+    // Return null if the URL didn't match a standard Drive share format
+    return null;
+  }
+
+  void _showAchievementViewer(
+      BuildContext context,
+      AchievementItem item,
+      ) {
+    final PageController pageController = PageController();
+    int currentPage = 0;
+
+    showGeneralDialog(
+      context: context,
+      barrierDismissible: true,
+      barrierLabel: 'viewer',
+      barrierColor: Colors.black.withOpacity(0.4),
+      pageBuilder: (_, __, ___) {
+        return StatefulBuilder(
+          builder: (context, setState) {
+            return Scaffold(
+              backgroundColor: Colors.transparent,
+              body: Stack(
+                children: [
+                  // ───────── Blurred Background ─────────
+                  BackdropFilter(
+                    filter: ImageFilter.blur(
+                      sigmaX: 12,
+                      sigmaY: 12,
+                    ),
+                    child: Container(
+                      color: Colors.black.withOpacity(0.65),
+                    ),
+                  ),
+
+                  SafeArea(
+                    child: Column(
+                      children: [
+                        // ───────── Top Bar ─────────
+                        Padding(
+                          padding: const EdgeInsets.all(20),
+                          child: Row(
+                            children: [
+                              Expanded(
+                                child: Text(
+                                  item.title,
+                                  style: const TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 24,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                  maxLines: 2,
+                                  overflow: TextOverflow.ellipsis,
+                                ),
+                              ),
+                              IconButton(
+                                onPressed: () => Navigator.pop(context),
+                                icon: const Icon(
+                                  Icons.close,
+                                  color: Colors.white,
+                                  size: 32,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+
+                        // ───────── Main Image Viewer ─────────
+                        Expanded(
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 24,
+                              vertical: 8,
+                            ),
+                            child: Row(
+                              children: [
+                                // Back Button
+                                if (item.images.length > 1)
+                                  _buildNavButton(
+                                    icon: Icons.chevron_left,
+                                    enabled: currentPage > 0,
+                                    onTap: () {
+                                      if (currentPage > 0) {
+                                        pageController.previousPage(
+                                          duration: const Duration(
+                                              milliseconds: 300),
+                                          curve: Curves.easeInOut,
+                                        );
+                                      }
+                                    },
+                                  ),
+
+                                const SizedBox(width: 16),
+
+                                // Image
+                                Expanded(
+                                  child: ClipRRect(
+                                    borderRadius: BorderRadius.circular(24),
+                                    child: Container(
+                                      color: Colors.white.withOpacity(0.05),
+                                      child: PageView.builder(
+                                        controller: pageController,
+                                        itemCount: item.images.length,
+                                        onPageChanged: (index) {
+                                          setState(() {
+                                            currentPage = index;
+                                          });
+                                        },
+                                        itemBuilder: (context, index) {
+                                          return InteractiveViewer(
+                                            minScale: 0.8,
+                                            maxScale: 5,
+                                            child: Image.network(
+                                              webHtmlElementStrategy: WebHtmlElementStrategy.fallback,
+                                              convertDriveLinkToThumbnail(item.images[index])!,
+                                              fit: BoxFit.contain,
+                                            ),
+                                          );
+                                        },
+                                      ),
+                                    ),
+                                  ),
+                                ),
+
+                                const SizedBox(width: 16),
+
+                                // Next Button
+                                _buildNavButton(
+                                  icon: Icons.chevron_right,
+                                  enabled: currentPage <
+                                      item.images.length - 1,
+                                  onTap: () {
+                                    if (currentPage <
+                                        item.images.length - 1) {
+                                      pageController.nextPage(
+                                        duration: const Duration(
+                                            milliseconds: 300),
+                                        curve: Curves.easeInOut,
+                                      );
+                                    }
+                                  },
+                                ),
+
+                              ],
+                            ),
+                          ),
+                        ),
+
+                        // ───────── Thumbnails (Amazon style) ─────────
+                        SizedBox(
+                          height: 90,
+                          child: ListView.builder(
+                            scrollDirection: Axis.horizontal,
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 24,
+                              vertical: 8,
+                            ),
+                            itemCount: item.images.length,
+                            itemBuilder: (context, index) {
+                              final isSelected =
+                                  index == currentPage;
+
+                              return GestureDetector(
+                                onTap: () {
+                                  pageController.animateToPage(
+                                    index,
+                                    duration: const Duration(
+                                        milliseconds: 300),
+                                    curve: Curves.easeInOut,
+                                  );
+                                },
+                                child: Container(
+                                  margin: const EdgeInsets.only(
+                                      right: 12),
+                                  padding: const EdgeInsets.all(3),
+                                  decoration: BoxDecoration(
+                                    border: Border.all(
+                                      color: isSelected
+                                          ? Colors.blue
+                                          : Colors.white24,
+                                      width: isSelected ? 2 : 1,
+                                    ),
+                                    borderRadius:
+                                    BorderRadius.circular(12),
+                                  ),
+                                  child: ClipRRect(
+                                    borderRadius:
+                                    BorderRadius.circular(10),
+                                    child: Image.network(
+                                      webHtmlElementStrategy: WebHtmlElementStrategy.fallback,
+                                      convertDriveLinkToThumbnail(item.images[index])!,
+                                      width: 70,
+                                      height: 70,
+                                      fit: BoxFit.cover,
+                                    ),
+                                  ),
+                                ),
+                              );
+                            },
+                          ),
+                        ),
+
+
+                        // ───────── Image Counter ─────────
+                        Padding(
+                          padding: const EdgeInsets.only(bottom: 8),
+                          child: Text(
+                            '${currentPage + 1} / ${item.images.length}',
+                            style: const TextStyle(
+                              color: Colors.white70,
+                              fontSize: 14,
+                            ),
+                          ),
+                        ),
+
+
+                        // ───────── Verify Button ─────────
+                        if (item.verifyUrl != null)
+                          Padding(
+                            padding: const EdgeInsets.fromLTRB(
+                                24, 8, 24, 24),
+                            child: SizedBox(
+                              width: double.infinity,
+                              child: FilledButton.icon(
+                                onPressed: () =>
+                                    _openUrl(item.verifyUrl!),
+                                style: FilledButton.styleFrom(
+                                  backgroundColor: Colors.white,
+                                  foregroundColor: Colors.black,
+                                  minimumSize:
+                                  const Size.fromHeight(56),
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius:
+                                    BorderRadius.circular(18),
+                                  ),
+                                ),
+                                icon: const Icon(Icons.verified),
+                                label: const Text(
+                                  'Verify Certificate',
+                                  style: TextStyle(
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            );
+          },
+        );
+      },
+    );
+  }
+
+  /// Navigation button widget
+  Widget _buildNavButton({
+    required IconData icon,
+    required bool enabled,
+    required VoidCallback onTap,
+  }) {
+    return Opacity(
+      opacity: enabled ? 1.0 : 0.3,
+      child: Material(
+        color: Colors.white.withOpacity(0.12),
+        borderRadius: BorderRadius.circular(50),
+        child: InkWell(
+          onTap: enabled ? onTap : null,
+          borderRadius: BorderRadius.circular(50),
+          child: SizedBox(
+            width: 56,
+            height: 56,
+            child: Icon(
+              icon,
+              color: Colors.white,
+              size: 34,
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     bool isTablet = MediaQuery.of(context).size.width > 600;
@@ -471,7 +795,7 @@ Perfect for homeowners, interior designers, and furniture businesses — try bef
 
                     const SizedBox(height: 40),
 
-                    /// ───────── SKILLS (NOW UNDER PROJECTS) ─────────
+                    /// ───────── SKILLS  ─────────
                     const SectionTitle(id: 'skills', title: 'Skills & Experience'),
                     const SizedBox(height: 12),
                     _SkillsCard(isTablet: isTablet),
@@ -493,6 +817,10 @@ Perfect for homeowners, interior designers, and furniture businesses — try bef
                         children: [
                           const Text(
                             'I’m available for freelance projects and Part-time roles.\nDrop me a message.',
+                          style: TextStyle(
+                            fontSize: 15,
+                            color: Colors.black,
+                            height: 1.5,),
                           ),
                           const SizedBox(height: 12),
                           Wrap(
@@ -519,7 +847,7 @@ Perfect for homeowners, interior designers, and furniture businesses — try bef
                                   )}",
                                 ),
                                 icon: const Icon(Icons.message_outlined),
-                                label: const Text('+201008653386'),
+                                label: const Text('Message me'),
                               ),
                             ],
                           ),
@@ -531,43 +859,13 @@ Perfect for homeowners, interior designers, and furniture businesses — try bef
                     const SizedBox(height: 40),
 
                     /// ───────── CERTIFICATIONS ─────────
-                    const SectionTitle(id: 'certs', title: 'Certifications'),
-                    const SizedBox(height: 12),
+                    // ─────────────────────────────────────────────────────────────
 
-                    LayoutBuilder(
-                      builder: (context, constraints) {
-                        int crossAxisCount = 1;
-                        if (constraints.maxWidth > 1200) {
-                          crossAxisCount = 3;
-                        } else if (constraints.maxWidth > 580) {
-                          crossAxisCount = 2;
-                        }
-                        return AlignedGridView.count(
-                          crossAxisCount: crossAxisCount,
-                          mainAxisSpacing: 20,
-                          crossAxisSpacing: 20,
-                          shrinkWrap: true,
-                          physics: const NeverScrollableScrollPhysics(),
-                          itemCount: certifications.length,
-                          itemBuilder: (context, index) {
-                            final cert = certifications[index];
-                            return AchievementCard(
-                              title: cert.title,
-                              subtitle: cert.organization,
-                              info: cert.date,
-                              imageAsset: cert.imageAsset,
-                              badgeText: "CERTIFIED",
-                              onTap: cert.verifyUrl != null ? () => _openUrl(cert.verifyUrl!) : null,
-                            );
-                          },
-                        );
-                      },
+
+                    const SectionTitle(
+                      id: 'achievements',
+                      title: 'Courses & Certifications',
                     ),
-
-                    const SizedBox(height: 40),
-
-                    /// ───────── COURSES ─────────
-                    const SectionTitle(id: 'courses', title: 'Courses Completed'),
                     const SizedBox(height: 12),
 
                     LayoutBuilder(
@@ -578,21 +876,20 @@ Perfect for homeowners, interior designers, and furniture businesses — try bef
                         } else if (constraints.maxWidth > 650) {
                           crossAxisCount = 2;
                         }
+
                         return AlignedGridView.count(
                           crossAxisCount: crossAxisCount,
                           mainAxisSpacing: 20,
                           crossAxisSpacing: 20,
                           shrinkWrap: true,
                           physics: const NeverScrollableScrollPhysics(),
-                          itemCount: courses.length,
+                          itemCount: achievements.length,
                           itemBuilder: (context, index) {
-                            final course = courses[index];
+                            final item = achievements[index];
+
                             return AchievementCard(
-                              title: course.title,
-                              subtitle: course.platform,
-                              info: course.duration,
-                              imageAsset: course.imageAsset,
-                              badgeText: "COURSE",
+                              item: item,
+                              onTap: () => _showAchievementViewer(context, item),
                             );
                           },
                         );
@@ -1100,107 +1397,124 @@ class ProjectCard extends StatelessWidget {
   }
 }
 
-class Certificate {
+class AchievementItem {
   final String title;
   final String organization;
   final String date;
-  final String imageAsset;
+  final List<String> images; // Supports multiple images
   final String? verifyUrl;
 
-  Certificate({
+  AchievementItem({
     required this.title,
     required this.organization,
     required this.date,
-    required this.imageAsset,
+    required this.images,
     this.verifyUrl,
   });
 }
 
-
-class Course {
-  final String title;
-  final String platform;
-  final String duration;
-  final String imageAsset;
-
-  Course({
-    required this.title,
-    required this.platform,
-    required this.duration,
-    required this.imageAsset,
-  });
-}
-
 class AchievementCard extends StatelessWidget {
-  final String title;
-  final String subtitle;
-  final String info;
-  final String imageAsset;
-  final String badgeText;
-  final VoidCallback? onTap;
+  final AchievementItem item;
+  final VoidCallback onTap;
 
   const AchievementCard({
     super.key,
-    required this.title,
-    required this.subtitle,
-    required this.info,
-    required this.imageAsset,
-    required this.badgeText,
-    this.onTap,
+    required this.item,
+    required this.onTap,
   });
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: onTap,
-      borderRadius: BorderRadius.circular(16),
+      borderRadius: BorderRadius.circular(28),
       child: Container(
-        // Remove 'Expanded' and use 'IntrinsicHeight' if necessary,
-        // but usually just removing Expanded/Spacer from the Column works.
+        constraints: const BoxConstraints(
+          minHeight: 240, // ensures all cards have enough height
+        ),
+        padding: const EdgeInsets.all(24),
         decoration: BoxDecoration(
-          color: Colors.white.withOpacity(0.05),
+          color: Colors.black54.withOpacity(0.10),
           borderRadius: BorderRadius.circular(16),
           border: Border.all(color: Colors.white.withOpacity(0.1)),
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisSize: MainAxisSize.min, // Tell the column to be as small as possible
+          mainAxisSize: MainAxisSize.min, // IMPORTANT
           children: [
-            // Image Section
-            Container(
-              padding: const EdgeInsets.all(4),
-              height: 280 ,
-              width: double.infinity,
-              decoration: const BoxDecoration(
-                color: Colors.black26,
-                borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
-              ),
-              child: ClipRRect(
-                borderRadius: const BorderRadius.vertical(top: Radius.circular(16)),
-                child: Image.asset(imageAsset, fit: BoxFit.fill, errorBuilder: (_, __, ___) => const Icon(Icons.image, color: Colors.white24)),
+            // Title
+            Text(
+              maxLines: 1,
+              item.title,
+              style: const TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.w800,
+                height: 1.2,
+                color: Color(0xFFFFFFFF),
               ),
             ),
-            // Text Section
-            Padding(
-              padding: const EdgeInsets.all(12),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(title, style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 16)),
-                  const SizedBox(height: 4),
-                  Text(subtitle, style: TextStyle(color: Colors.greenAccent.withOpacity(0.8), fontSize: 13)),
-                  const SizedBox(height: 4),
-                  Text(info, style: TextStyle(color: Colors.white70, fontSize: 12)),
-                  const SizedBox(height: 12), // Use a fixed gap instead of Spacer()
-                  Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                    decoration: BoxDecoration(
-                      color: Colors.white10,
-                      borderRadius: BorderRadius.circular(6),
-                    ),
-                    child: Text(badgeText, style: const TextStyle(color: Colors.white, fontSize: 10)),
+
+            const SizedBox(height: 18),
+
+            // Date badge
+            Container(
+              padding: const EdgeInsets.symmetric(
+                horizontal: 10,
+                vertical: 6,
+              ),
+              decoration: BoxDecoration(
+                color: Colors.green.withOpacity(0.4),
+                borderRadius: BorderRadius.circular(8),
+                border: Border.all(color: Colors.green.withOpacity(0.5)),
+              ),
+              child: Text(
+                item.date.toUpperCase(),
+                style: const TextStyle(
+                  fontSize: 12,
+                  fontWeight: FontWeight.w700,
+                  color: Colors.greenAccent,
+                ),
+              ),
+            ),
+
+            const SizedBox(height: 22),
+
+            // Organization
+            Text(
+              "by ${item.organization}",
+              style: const TextStyle(
+                fontSize: 16,
+                color: Color(0xFF7AD17F),
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+
+            const SizedBox(height: 28),
+
+
+            // Button
+            SizedBox(
+              width: double.infinity,
+              child: OutlinedButton(
+                onPressed: onTap,
+                style: OutlinedButton.styleFrom(
+                  foregroundColor: Colors.greenAccent,
+                  side: const BorderSide(
+                    color: Colors.greenAccent,
+                    width: 2,
                   ),
-                ],
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(50),
+                  ),
+                  padding: const EdgeInsets.symmetric(vertical: 18),
+                ),
+                child: Text(
+                  "View Certificate",
+                  style: const TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
               ),
             ),
           ],
@@ -1209,6 +1523,7 @@ class AchievementCard extends StatelessWidget {
     );
   }
 }
+
 
 /*
 flutter build web --base-href /omar-portfolio/
