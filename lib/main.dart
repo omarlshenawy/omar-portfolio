@@ -414,10 +414,7 @@ Perfect for homeowners, interior designers, and furniture businesses — try bef
     return null;
   }
 
-  void _showAchievementViewer(
-      BuildContext context,
-      AchievementItem item,
-      ) {
+  void _showAchievementViewer(BuildContext context, AchievementItem item, bool isTablet , double width) {
     final PageController pageController = PageController();
     int currentPage = 0;
 
@@ -486,7 +483,7 @@ Perfect for homeowners, interior designers, and furniture businesses — try bef
                             child: Row(
                               children: [
                                 // Back Button
-                                if (item.images.length > 1)
+                                if (item.images.length > 1&&isTablet==true)
                                   _buildNavButton(
                                     icon: Icons.chevron_left,
                                     enabled: currentPage > 0,
@@ -535,7 +532,7 @@ Perfect for homeowners, interior designers, and furniture businesses — try bef
 
                                 const SizedBox(width: 16),
 
-                                if (item.images.length > 1)
+                                if (item.images.length > 1&&isTablet==true)
                                 // Next Button
                                   _buildNavButton(
                                     icon: Icons.chevron_right,
@@ -632,7 +629,7 @@ Perfect for homeowners, interior designers, and furniture businesses — try bef
                             padding: const EdgeInsets.fromLTRB(
                                 24, 8, 24, 24),
                             child: SizedBox(
-                              width: double.infinity,
+                              width: (isTablet==true)? width/2 : width/1.5,
                               child: FilledButton.icon(
                                 onPressed: () =>
                                     _openUrl(item.verifyUrl!),
@@ -674,7 +671,8 @@ Perfect for homeowners, interior designers, and furniture businesses — try bef
     required IconData icon,
     required bool enabled,
     required VoidCallback onTap,
-  }) {
+  })
+  {
     return Opacity(
       opacity: enabled ? 1.0 : 0.3,
       child: Material(
@@ -700,6 +698,7 @@ Perfect for homeowners, interior designers, and furniture businesses — try bef
   @override
   Widget build(BuildContext context) {
     bool isTablet = MediaQuery.of(context).size.width > 600;
+    double screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
       body: Stack(
         children: [
@@ -874,7 +873,7 @@ Perfect for homeowners, interior designers, and furniture businesses — try bef
                         int crossAxisCount = 1;
                         if (constraints.maxWidth > 1200) {
                           crossAxisCount = 3;
-                        } else if (constraints.maxWidth > 650) {
+                        } else if (constraints.maxWidth > 760) {
                           crossAxisCount = 2;
                         }
 
@@ -890,7 +889,7 @@ Perfect for homeowners, interior designers, and furniture businesses — try bef
 
                             return AchievementCard(
                               item: item,
-                              onTap: () => _showAchievementViewer(context, item),
+                              onTap: () => _showAchievementViewer(context, item, isTablet,screenWidth),
                             );
                           },
                         );
@@ -1433,7 +1432,7 @@ class AchievementCard extends StatelessWidget {
         constraints: const BoxConstraints(
           minHeight: 240, // ensures all cards have enough height
         ),
-        padding: const EdgeInsets.all(24),
+        padding: const EdgeInsets.only(left: 18, right: 18, top: 24, bottom: 24),
         decoration: BoxDecoration(
           color: Colors.black54.withOpacity(0.10),
           borderRadius: BorderRadius.circular(16),
