@@ -42,8 +42,8 @@ class _PortfolioHomePageState extends State<PortfolioHomePage> with SingleTicker
   final List<Project> projects = [
 
     Project(
-      title: "AI Body Measurements using ResNet34",
-      short: 'Computer vision app that predicts full body measurements from front and side images using deep learning.',
+      title: "AI Body Measurements",
+      short: 'Computer vision app that predicts full body measurements from front and side images using ResNet34.',
       long: '''Estimate human body measurements instantly using AI and computer vision. This project leverages deep learning models to analyze front and side images of a person and generate accurate body measurements without manual input.
 
 Built using PyTorch and advanced image processing techniques, the system combines semantic segmentation and regression modeling to isolate the human body and predict key physical dimensions.
@@ -69,7 +69,7 @@ This project demonstrates strong skills in computer vision, deep learning, and f
     ),
 
     Project(
-      title: "Phishing Email Detection using BERT",
+      title: "Phishing Email Detection",
       short: 'AI-powered NLP model that detects phishing emails with 99% accuracy using fine-tuned BERT.',
       long: '''Detect phishing emails with high precision using state-of-the-art Natural Language Processing. This project leverages a fine-tuned BERT model to classify emails as legitimate or phishing, achieving outstanding performance on real-world datasets.
 
